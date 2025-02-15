@@ -1,2 +1,17 @@
 @import 'tailwindcss';
 @import '@nuxt/ui';
+
+:root {
+	--ui-primary: oklch(0.606 0.25 292.717);
+}
+@theme {
+	--font-sans: 'Nunito', sans-serif;
+}
+
+html {
+	@apply h-screen;
+}
+body {
+	@apply bg-transparent;
+	font-weight: 400;
+}

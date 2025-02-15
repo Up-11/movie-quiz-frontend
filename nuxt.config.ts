@@ -6,6 +6,10 @@ export default defineNuxtConfig({
 	future: {
 		compatibilityVersion: 4,
 	},
+	app: {
+		pageTransition: { name: 'page', mode: 'default' },
+		layoutTransition: { name: 'layout', mode: 'default' },
+	},
 	components: [
 		{ path: '~/shared/components', prefix: '' },
 		{
@@ -21,8 +25,31 @@ export default defineNuxtConfig({
 	vite: {
 		plugins: [tailwindcss()],
 	},
-	modules: ['@nuxt/ui', '@pinia/nuxt', '@nuxt/fonts'],
+	modules: [
+		'@nuxt/ui',
+		'@pinia/nuxt',
+		'@nuxt/fonts',
+		'@nuxt/image',
+		'@vueuse/nuxt',
+	],
 	ui: {
 		colorMode: false,
+	},
+	ssr: false,
+	fonts: {
+		defaults: {
+			weights: [400, 500, 600, 700, 200, 300],
+			styles: ['normal', 'italic'],
+			subsets: [
+				'cyrillic-ext',
+				'cyrillic',
+				'greek-ext',
+				'greek',
+				'vietnamese',
+				'latin-ext',
+				'latin',
+			],
+		},
+		families: [{ name: 'Nunito', provider: 'google' }],
 	},
 })
