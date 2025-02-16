@@ -7,8 +7,6 @@ export const ROUTES = {
 		return `/quiz/${id}`
 	},
 
-	profile: '/profile',
-
 	authorization: '/auth',
 
 	admin: '/admin',

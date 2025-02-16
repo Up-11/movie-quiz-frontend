@@ -1,7 +1,7 @@
 FRONT
-[] -  parralax effect on cards
+[x] -  parralax effect on cards
 [] - layout transitions 
 [] - profile page 
-[] - auth 
+[x] - auth 
 [] - quiz complition 
 []  - admin

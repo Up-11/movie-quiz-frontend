@@ -2,7 +2,7 @@
 @import '@nuxt/ui';
 
 :root {
-	--ui-primary: oklch(0.606 0.25 292.717);
+	--ui-primary: oklch(0.811 0.111 293.571);
 }
 @theme {
 	--font-sans: 'Nunito', sans-serif;
@@ -14,4 +14,22 @@ html {
 body {
 	@apply bg-transparent;
 	font-weight: 400;
+}
+
+/* Кастомный скроллбар */
+::-webkit-scrollbar {
+	width: 6px; /* Тонкий скроллбар */
+}
+
+::-webkit-scrollbar-track {
+	background: #1a1a2e; /* Тёмный фон трека */
+}
+
+::-webkit-scrollbar-thumb {
+	background: #6a0dad; /* Фиолетовый оттенок */
+	border-radius: 10px; /* Скруглённые края */
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: #8a2be2; /* Светлее при наведении */
 }

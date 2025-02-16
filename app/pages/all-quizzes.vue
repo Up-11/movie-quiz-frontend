@@ -1,31 +1,60 @@
-<script lang="ts" setup>
+<script setup>
+import QuizCard from '~/modules/quiz/components/QuizCard.vue'
 import { quizCards } from '~/modules/quiz/mock'
 
 definePageMeta({
 	layout: 'root',
 })
-</script>
+useHead({
+	title: 'Фильмонафт – Все викторины',
+	meta: [
+		{ charset: 'utf-8' },
+		{ name: 'viewport', content: 'width=device-width, initial-scale=1.0' },
+		{
+			name: 'description',
+			content:
+				'Выбери квиз по любимому жанру или фильму! Огромная коллекция викторин по культовым кинолентам.',
+		},
+		{
+			name: 'keywords',
+			content:
+				'викторина, фильмы, кино, тесты, угадай фильм, киноигра, квизы, киновикторина',
+		},
+		{ name: 'author', content: 'MovieQuiz Team' },
 
+		{ property: 'og:title', content: 'Все кино-викторины' },
+		{
+			property: 'og:description',
+			content:
+				'Проверь свои знания о кино! Выбери квиз по любимому фильму или жанру и пройди увлекательный тест.',
+		},
+		{
+			property: 'og:image',
+			content: 'https://yourwebsite.com/all-quizzes.jpg',
+		},
+		{ property: 'og:url', content: 'https://yourwebsite.com/quizzes' },
+		{ property: 'og:type', content: 'website' },
+
+		{ name: 'twitter:card', content: 'summary_large_image' },
+		{ name: 'twitter:title', content: 'Все кино-викторины' },
+		{
+			name: 'twitter:description',
+			content:
+				'Выбери викторину по любимому фильму или жанру и проверь свои знания!',
+		},
+		{
+			name: 'twitter:image',
+			content: 'https://yourwebsite.com/all-quizzes.jpg',
+		},
+	],
+	link: [{ rel: 'icon', href: '/favicon.ico', type: 'image/x-icon' }],
+})
+</script>
 <template>
-	<div class="h-screen px-10 flex flex-col gap-5">
-		<section>
-			<VTitle class="text-center" :title="'Поиск '" />
-			<search class="flex gap-10 mt-2">
-				<SearchInput class="w-full" />
-				<UButton class="px-4">Найти</UButton>
-			</search>
-		</section>
-		<section class="flex flex-col gap-3">
-			<VTitle class="text-center" :title="'Викторины '" />
-			<div>
-				<div
-					class="grid justify-items-center xl:grid-cols-4 justify-center md:grid-cols-3 sm:grid-cols-1 gap-4"
-				>
-					<QuizCard v-for="card in quizCards" :key="card.id" :card="card" />
-				</div>
-			</div>
-		</section>
-	</div>
+	<section class="flex mt-5 flex-col gap-3">
+		<VTitle :title="'Все Викторины '" />
+		<div><QuzzCardList :component="QuizCard" :quizes="quizCards" /></div>
+	</section>
 </template>
 
 <style scoped></style>

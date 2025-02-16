@@ -6,10 +6,7 @@ export default defineNuxtConfig({
 	future: {
 		compatibilityVersion: 4,
 	},
-	app: {
-		pageTransition: { name: 'page', mode: 'default' },
-		layoutTransition: { name: 'layout', mode: 'default' },
-	},
+
 	components: [
 		{ path: '~/shared/components', prefix: '' },
 		{
@@ -32,9 +29,7 @@ export default defineNuxtConfig({
 		'@nuxt/image',
 		'@vueuse/nuxt',
 	],
-	ui: {
-		colorMode: false,
-	},
+
 	ssr: false,
 	fonts: {
 		defaults: {

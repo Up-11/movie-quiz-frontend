@@ -7,7 +7,7 @@ definePageMeta({
 
 <template>
 	<div
-		class="h-screen bg-center bg-[url('/assets/img/Home.png')] absolute inset-0 -z-10 bg-cover"
+		class="h-screen bg-center bg-[url('/assets/img/background.jpg')] absolute inset-0 -z-10 bg-cover"
 	></div>
 	<section class="h-screen w-full flex flex-col justify-center">
 		<div class="flex justify-center w-full">
@@ -19,7 +19,7 @@ definePageMeta({
 						Фильмонафт
 					</h1>
 					<h2
-						class="font-semibold md:text-lg text-violet-600 uppercase select-none"
+						class="font-semibold md:text-lg text-violet-200 uppercase select-none"
 					>
 						Викторины по известным фильмам
 					</h2>
@@ -32,7 +32,7 @@ definePageMeta({
 					variant="link"
 					trailing-icon="uil:arrow-right"
 					:ui="{
-						base: 'md:text-2xl',
+						base: 'md:text-2xl text-violet-300 hover:text-violet-400',
 						trailingIcon: 'size-8',
 					}"
 					>Начать прохождение

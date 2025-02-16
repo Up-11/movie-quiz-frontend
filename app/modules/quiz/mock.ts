@@ -12,6 +12,7 @@ export const quizCards: QuizCard[] = [
 		usersComplitions: 12034,
 		questionsCount: 15,
 		film: 'Inception',
+		completed: true,
 	},
 	{
 		id: '2',
@@ -24,6 +25,7 @@ export const quizCards: QuizCard[] = [
 		usersComplitions: 9856,
 		questionsCount: 12,
 		film: 'Interstellar',
+		completed: false,
 	},
 	{
 		id: '3',
@@ -36,9 +38,10 @@ export const quizCards: QuizCard[] = [
 		usersComplitions: 15021,
 		questionsCount: 20,
 		film: 'The Matrix',
+		completed: false,
 	},
 	{
-		id: '4',
+		id: '021489',
 		name: 'The Dark Knight Quiz',
 		imageUrl:
 			'https://pikuco.ru/upload/test_stable/fc8/fc829265c8003d171e2564233320da33.webp',
@@ -48,5 +51,58 @@ export const quizCards: QuizCard[] = [
 		usersComplitions: 13287,
 		questionsCount: 18,
 		film: 'The Dark Knight',
+		completed: false,
+	},
+	{
+		id: '821',
+		name: 'The Dark Knight Quiz',
+		imageUrl:
+			'https://pikuco.ru/upload/test_stable/fc8/fc829265c8003d171e2564233320da33.webp',
+		description:
+			'Тест по фильму "Темный рыцарь". Знаете ли вы все о Джокере и Бэтмене?',
+		rating: 4.9,
+		usersComplitions: 13287,
+		questionsCount: 18,
+		film: 'The Dark Knight',
+		completed: false,
+	},
+	{
+		id: '9',
+		name: 'The Dark Knight Quiz',
+		imageUrl:
+			'https://pikuco.ru/upload/test_stable/fc8/fc829265c8003d171e2564233320da33.webp',
+		description:
+			'Тест по фильму "Темный рыцарь". Знаете ли вы все о Джокере и Бэтмене?',
+		rating: 4.9,
+		usersComplitions: 13287,
+		questionsCount: 18,
+		film: 'The Dark Knight',
+		completed: false,
+	},
+	{
+		id: '14',
+		name: 'The Dark Knight Quiz',
+		imageUrl:
+			'https://pikuco.ru/upload/test_stable/fc8/fc829265c8003d171e2564233320da33.webp',
+		description:
+			'Тест по фильму "Темный рыцарь". Знаете ли вы все о Джокере и Бэтмене?',
+		rating: 4.9,
+		usersComplitions: 13287,
+		questionsCount: 18,
+		film: 'The Dark Knight',
+		completed: false,
+	},
+	{
+		id: '12',
+		name: 'The Dark Knight Quiz',
+		imageUrl:
+			'https://pikuco.ru/upload/test_stable/fc8/fc829265c8003d171e2564233320da33.webp',
+		description:
+			'Тест по фильму "Темный рыцарь". Знаете ли вы все о Джокере и Бэтмене?',
+		rating: 4.9,
+		usersComplitions: 13287,
+		questionsCount: 18,
+		film: 'The Dark Knight',
+		completed: true,
 	},
 ]
