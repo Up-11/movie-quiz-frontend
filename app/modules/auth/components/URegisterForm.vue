@@ -38,10 +38,10 @@ const canSendData = computed(() => {
 		@submit="onSubmit"
 	>
 		<UFormField label="Имя" name="name">
-			<UInput v-model="state.name" />
+			<UInput class="w-full" v-model="state.name" />
 		</UFormField>
 		<UFormField label="Электронная почта" name="email">
-			<UInput v-model="state.email" />
+			<UInput class="w-full" v-model="state.email" />
 		</UFormField>
 
 		<UFormField
@@ -49,7 +49,7 @@ const canSendData = computed(() => {
 			name="password"
 			description="Пароль должен содержать не менее 4 символов."
 		>
-			<UInput v-model="state.password" type="password" />
+			<UInput class="w-full" v-model="state.password" type="password" />
 		</UFormField>
 
 		<UFormField

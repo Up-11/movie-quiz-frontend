@@ -14,7 +14,7 @@
 
 <style scoped>
 .bg {
-	background-image: url('/assets/img/testbg2.jpeg');
+	background-image: url('/img/testbg2.jpeg');
 }
 .bg:after {
 	content: '';

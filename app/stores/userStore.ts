@@ -1,13 +1,16 @@
 import { defineStore } from 'pinia'
-import type { IUser } from '~/shared/types/common.types'
+import { USER_ROLE, type IUser } from '~/shared/types/common.types'
 
 export const useUserStore = defineStore('UserStore', () => {
 	const user = reactive<IUser>({
-		id: '1233',
+		id: '123',
 		name: 'Гена букин',
 		email: 'sinBlyadi@gmail.com',
+		role: USER_ROLE.USER,
 	})
 
 	const isAuth = computed(() => user.id !== null)
-	return { user, isAuth }
+
+	const isAdmin = computed(() => user.role === USER_ROLE.ADMIN)
+	return { user, isAuth, isAdmin }
 })

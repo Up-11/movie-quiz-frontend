@@ -67,13 +67,13 @@ const userStore = useUserStore()
 			</div>
 		</nav>
 		<nav class="md:hidden">
-			<UButton
-				v-if="userStore.isAuth"
-				size="lg"
-				icon="uil:user"
-				variant="ghost"
-				color="primary"
-			/>
+			<USlideover title="Профиль" v-if="userStore.isAuth">
+				<UButton size="lg" icon="uil:user" variant="ghost" color="primary" />
+				<template #body>
+					<UserProfile />
+				</template>
+			</USlideover>
+
 			<UButton
 				v-else
 				size="lg"

@@ -11,6 +11,8 @@ export const quizCards: QuizCard[] = [
 		rating: 4.8,
 		usersComplitions: 12034,
 		questionsCount: 15,
+		userRating: 2.9,
+
 		film: 'Inception',
 		completed: true,
 	},
@@ -22,6 +24,7 @@ export const quizCards: QuizCard[] = [
 		description:
 			'Тест о фильме "Интерстеллар". Сможете ли вы ответить на вопросы о путешествиях во времени и космосе?',
 		rating: 4.9,
+		userRating: 4.9,
 		usersComplitions: 9856,
 		questionsCount: 12,
 		film: 'Interstellar',

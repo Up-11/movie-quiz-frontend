@@ -34,7 +34,7 @@ const canSendData = computed(() => {
 			name="email"
 			description="Убедитесь, что почта указана правильно."
 		>
-			<UInput v-model="state.email" />
+			<UInput class="w-full" v-model="state.email" />
 		</UFormField>
 
 		<UFormField
@@ -42,7 +42,7 @@ const canSendData = computed(() => {
 			name="password"
 			description="Пароль должен содержать не менее 6 символов."
 		>
-			<UInput v-model="state.password" type="password" />
+			<UInput class="w-full" v-model="state.password" type="password" />
 		</UFormField>
 
 		<UButton :disabled="!canSendData" type="submit"> Войти </UButton>

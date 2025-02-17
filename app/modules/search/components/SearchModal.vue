@@ -15,11 +15,11 @@ const items = ref<TabsItem[]>([
 	{
 		label: 'По названию',
 		slot: 'byName',
-		icon: 'i-lucide-user',
+		icon: 'uil:text-fields',
 	},
 	{
 		label: 'По фильму',
-		icon: 'i-lucide-lock',
+		icon: 'uil:video',
 		slot: 'byFilm',
 	},
 ])
@@ -71,7 +71,7 @@ const items = ref<TabsItem[]>([
 							:unmount-on-hide="false"
 						>
 							<template #byName>
-								<div v-if="filteredByName.length" class="flex flex-col gap-1">
+								<div v-if="filteredByName.length" class="flex flex-col gap-5">
 									<SmallQuizCard
 										:key="quiz.id"
 										:card="quiz"
@@ -83,7 +83,7 @@ const items = ref<TabsItem[]>([
 								</div>
 							</template>
 							<template #byFilm>
-								<div v-if="filteredByFilm.length" class="flex flex-col gap-1">
+								<div v-if="filteredByFilm.length" class="flex flex-col gap-5">
 									<SmallQuizCard
 										:key="quiz.id"
 										:card="quiz"
@@ -101,7 +101,7 @@ const items = ref<TabsItem[]>([
 					<ULoader />
 				</div>
 
-				<h1 class="font-bold text-violet-300">
+				<h1 v-else class="font-bold text-violet-300">
 					Введите название искомой викторины или фильма
 				</h1>
 			</section>

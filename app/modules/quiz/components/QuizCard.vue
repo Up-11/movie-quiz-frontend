@@ -44,7 +44,7 @@ onMounted(() => {
 			:alt="card.name"
 		/>
 		<div class="p-4 flex flex-col gap-2 justify-between h-full">
-			<div class="flex gap-2 justify-between">
+			<div class="flex gap-2 items-center justify-between">
 				<h1 class="font-bold">{{ card.name }}</h1>
 				<h1 class="font-bold text-violet-200 text-sm">{{ card.film }}</h1>
 			</div>
@@ -53,12 +53,7 @@ onMounted(() => {
 			</p>
 			<USeparator class="mt-auto" />
 			<div class="flex gap-4 select-none mt-auto">
-				<UTooltip text="Рейтинг">
-					<div class="flex items-center">
-						<Icon name="uil:star" size="20" />
-						<span class="text-sm font-bold">{{ card.rating }}</span>
-					</div>
-				</UTooltip>
+				<UTooltip text="Рейтинг"> <URating :number="card.rating" /> </UTooltip>
 				<UTooltip text="Людей прошло">
 					<div class="flex items-center">
 						<Icon name="uil:users-alt" size="20" />

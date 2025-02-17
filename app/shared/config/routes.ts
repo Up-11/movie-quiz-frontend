@@ -10,6 +10,8 @@ export const ROUTES = {
 	authorization: '/auth',
 
 	admin: '/admin',
+
+	noAccess: '/no-access',
 }
 
 export type AppRoutes = typeof ROUTES

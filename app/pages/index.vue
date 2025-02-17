@@ -6,9 +6,7 @@ definePageMeta({
 </script>
 
 <template>
-	<div
-		class="h-screen bg-center bg-[url('/assets/img/background.jpg')] absolute inset-0 -z-10 bg-cover"
-	></div>
+	<div class="h-screen bg bg-center absolute inset-0 -z-10 bg-cover"></div>
 	<section class="h-screen w-full flex flex-col justify-center">
 		<div class="flex justify-center w-full">
 			<div class="ml-[10%] flex flex-col gap-5">
@@ -42,4 +40,18 @@ definePageMeta({
 	</section>
 </template>
 
-<style scoped></style>
+<style scoped>
+.bg {
+	background-image: url('/img/background.jpg');
+}
+.bg:after {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	background-color: rgba(0, 0, 0, 0.548);
+	bottom: 0;
+	z-index: 2;
+}
+</style>

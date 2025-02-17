@@ -58,12 +58,12 @@ const items = ref<TabsItem[]>([
 			>
 				<template #login>
 					<div class="flex justify-center">
-						<ULoginForm class="w-[200px]" />
+						<ULoginForm class="w-[300px]" />
 					</div>
 				</template>
 				<template #register>
 					<div class="flex justify-center">
-						<URegisterForm class="w-[200px]" />
+						<URegisterForm class="w-[300px]" />
 					</div>
 				</template>
 			</UTabs>

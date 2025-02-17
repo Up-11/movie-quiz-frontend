@@ -8,4 +8,5 @@ export type QuizCard = {
 	questionsCount: number
 	film: string
 	completed: boolean
+	userRating?: number
 }

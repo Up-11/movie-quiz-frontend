@@ -17,11 +17,14 @@ defineProps<{
 			>Пройдено</UBadge
 		>
 
-		<div class="w-[150px] flex flex-col justify-center">
-			<NuxtImg class="object-center max-w-[150px]" :src="card.imageUrl" />
+		<div class="max-w-[150px] w-full flex flex-col justify-center">
+			<NuxtImg
+				class="object-center w-full max-w-[150px]"
+				:src="card.imageUrl"
+			/>
 		</div>
 		<div class="p-4 flex flex-col gap-2 justify-between h-full">
-			<div class="flex gap-2 justify-between">
+			<div class="flex gap-2 items-center justify-between">
 				<h1 class="font-bold text-sm">{{ card.name }}</h1>
 				<h1 class="font-bold text-violet-200 text-xs">{{ card.film }}</h1>
 			</div>
