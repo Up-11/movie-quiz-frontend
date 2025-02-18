@@ -1,7 +1,7 @@
 export interface IUser {
 	id: string | null
 	name: string | null
-	email: string | null
+	email: string
 	role: USER_ROLE | null
 }
 

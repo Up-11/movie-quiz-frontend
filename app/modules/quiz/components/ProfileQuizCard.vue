@@ -2,14 +2,24 @@
 import type { QuizCard } from '../types'
 import vue3StarRatings from 'vue3-star-ratings'
 
-const props = defineProps<{ card: QuizCard }>()
+const { card } = defineProps<{ card: QuizCard }>()
+const emit = defineEmits(['update-rating'])
 
 const isRatingFieldOpen = ref<boolean>(false)
-const rating = ref<number>(props.card.userRating || 0)
-const newRating = ref<number>(props.card.userRating || 0)
+const rating = ref<number>(card.userRating || 0)
+const newRating = ref<number>(card.userRating || 0)
 
-const handleSaveNewRating = () => {
+watch(rating, newVal => {
+	rating.value = Math.round(newVal * 2) / 2
+})
+
+const handleSaveNewRating = async () => {
 	newRating.value = rating.value
+	if (newRating.value === 0) {
+		deleteRating()
+		return
+	}
+	emit('update-rating', newRating.value)
 	isRatingFieldOpen.value = false
 }
 
@@ -20,6 +30,7 @@ const toggleRatingField = () => {
 
 const deleteRating = () => {
 	newRating.value = 0
+	emit('update-rating', 0)
 	isRatingFieldOpen.value = false
 }
 
@@ -92,7 +103,7 @@ const ratingBtnText = computed(() => {
 					variant="soft"
 					size="xs"
 					@click="deleteRating"
-					class="w-full"
+					class="w-full self-end"
 				>
 					Удалить
 				</UButton>

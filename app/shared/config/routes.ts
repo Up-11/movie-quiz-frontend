@@ -9,7 +9,13 @@ export const ROUTES = {
 
 	authorization: '/auth',
 
-	admin: '/admin',
+	admin: {
+		index: '/admin',
+		quizzes: '/admin/quizzes',
+		users: '/admin/users',
+		addAdmin: '/admin/add-admin',
+		createQuiz: '/admin/create-quiz',
+	},
 
 	noAccess: '/no-access',
 }

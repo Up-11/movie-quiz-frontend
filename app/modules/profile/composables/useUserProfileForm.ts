@@ -1,7 +1,7 @@
 import type { FormSubmitEvent } from '@nuxt/ui'
 import { type EditProfileSchema } from '../schemas/edit-profile.schema'
 
-export const useUserProfile = () => {
+export const useUserProfileForm = () => {
 	const store = useUserStore()
 
 	const { user } = store

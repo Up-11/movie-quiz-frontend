@@ -6,7 +6,7 @@ definePageMeta({
 </script>
 
 <template>
-	<div class="h-screen bg bg-center absolute inset-0 -z-10 bg-cover"></div>
+	<div class="h-screen bg bg-center fixed inset-0 -z-10 bg-cover"></div>
 	<section class="h-screen w-full flex flex-col justify-center">
 		<div class="flex justify-center w-full">
 			<div class="ml-[10%] flex flex-col gap-5">
