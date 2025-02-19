@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 import RestartModal from '~/modules/quiz/components/RestartModal.vue'
 import { quizCards } from '~/modules/quiz/mock'
-import { useQuizStore } from '~/modules/quiz/store/QuizStore'
 import { ROUTES } from '~/shared/config/routes'
 
 definePageMeta({
@@ -22,23 +21,23 @@ useHead({
 	title: `Викторина ${currentQuiz.value?.name || 'Неизвестная викторина'}`,
 })
 
-const store = useQuizStore()
 const modal = useModal()
 
-const openModal = () => {
-	modal.open(RestartModal)
-}
-
-const { isStarted } = storeToRefs(store)
-const { updateCurrentQuiz, clearCurrentQuiz, clearIsStarted, checkIsStarted } =
-	store
+const {
+	updateCurrentQuiz,
+	checkIsStarted,
+	clearCurrentQuiz,
+	clearIsStarted,
+	isStarted,
+} = useQuizCompletion()
 
 onMounted(() => {
-	if (currentQuiz.value) {
-		updateCurrentQuiz(currentQuiz.value)
-		if (checkIsStarted()) {
-			openModal()
-		}
+	if (!currentQuiz.value) return
+
+	updateCurrentQuiz(currentQuiz.value)
+
+	if (checkIsStarted()) {
+		modal.open(RestartModal)
 	}
 })
 

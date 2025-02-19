@@ -11,7 +11,7 @@ const itemsWithLetters = assignLettersToItems(question.variants)
 
 <template>
 	<div :class="'h-full flex-col items-center justify-center gap-5'">
-		<div class="flex items-center justify-center mt-5 gap-4">
+		<div class="mt-5 flex items-center justify-center gap-4">
 			<NuxtImg
 				:src="question.imageUrl"
 				class="rounded-sm"
@@ -19,8 +19,8 @@ const itemsWithLetters = assignLettersToItems(question.variants)
 				alt="Question Image"
 			/>
 		</div>
-		<h1 class="font-bold text-3xl mt-3">{{ question.question }}</h1>
-		<div class="flex flex-col gap-5 mt-5">
+		<h1 class="mt-3 text-3xl font-bold">{{ question.question }}</h1>
+		<div class="mt-5 flex flex-col gap-5">
 			<VariantComponent
 				v-for="item in itemsWithLetters"
 				:key="item.id"

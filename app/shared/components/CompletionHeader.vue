@@ -1,10 +1,9 @@
 <script lang="ts" setup>
-import { useQuizStore } from '~/modules/quiz/store/QuizStore'
 import { ROUTES } from '../config/routes'
 
-const store = useQuizStore()
-const { currentQuiz, isStarted } = storeToRefs(store)
-const { startCompletion, restartCompletion } = store
+const { currentQuiz, isStarted, startCompletion, restartCompletion } =
+	useQuizCompletion()
+
 const value = ref<number>(7)
 </script>
 

@@ -1,10 +1,7 @@
 <script setup lang="ts">
-import { useQuizStore } from '../store/QuizStore'
-
-const store = useQuizStore()
 const modal = useModal()
-const { restartCompletion } = store
-const { isStarted } = storeToRefs(store)
+
+const { restartCompletion, isStarted } = useQuizCompletion()
 
 const onClickRestartCompletion = () => {
 	modal.close()

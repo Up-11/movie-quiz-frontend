@@ -4,7 +4,7 @@ export default defineNuxtConfig({
 	compatibilityDate: '2024-11-01',
 	devtools: { enabled: true },
 	future: {
-		compatibilityVersion: 4,
+		compatibilityVersion: 4
 	},
 
 	components: [
@@ -12,22 +12,22 @@ export default defineNuxtConfig({
 		{
 			path: '~/modules',
 			pattern: '*/components/**/*.vue',
-			pathPrefix: false,
-		},
+			pathPrefix: false
+		}
 	],
 	imports: {
-		dirs: ['composables', 'modules/**/composables', 'shared/composables'],
+		dirs: ['composables', 'modules/**/composables', 'shared/composables']
 	},
 	css: ['~/assets/css/main.css'],
 	vite: {
-		plugins: [tailwindcss()],
+		plugins: [tailwindcss()]
 	},
 	modules: [
 		'@nuxt/ui',
 		'@pinia/nuxt',
 		'@nuxt/fonts',
 		'@nuxt/image',
-		'@vueuse/nuxt',
+		'@vueuse/nuxt'
 	],
 
 	ssr: false,
@@ -42,9 +42,9 @@ export default defineNuxtConfig({
 				'greek',
 				'vietnamese',
 				'latin-ext',
-				'latin',
-			],
+				'latin'
+			]
 		},
-		families: [{ name: 'Nunito', provider: 'google' }],
-	},
+		families: [{ name: 'Nunito', provider: 'google' }]
+	}
 })

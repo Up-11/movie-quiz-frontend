@@ -1,39 +1,19 @@
 <script lang="ts" setup>
+import { useProfileRating } from '../composables/useProfileRating'
 import type { QuizCard } from '../types'
 import vue3StarRatings from 'vue3-star-ratings'
 
 const { card } = defineProps<{ card: QuizCard }>()
 const emit = defineEmits(['update-rating'])
 
-const isRatingFieldOpen = ref<boolean>(false)
-const rating = ref<number>(card.userRating || 0)
-const newRating = ref<number>(card.userRating || 0)
-
-watch(rating, newVal => {
-	rating.value = Math.round(newVal * 2) / 2
-})
-
-const handleSaveNewRating = async () => {
-	newRating.value = rating.value
-	if (newRating.value === 0) {
-		deleteRating()
-		return
-	}
-	emit('update-rating', newRating.value)
-	isRatingFieldOpen.value = false
-}
-
-const toggleRatingField = () => {
-	isRatingFieldOpen.value = !isRatingFieldOpen.value
-	rating.value = newRating.value
-}
-
-const deleteRating = () => {
-	newRating.value = 0
-	emit('update-rating', 0)
-	isRatingFieldOpen.value = false
-}
-
+const {
+	isRatingFieldOpen,
+	newRating,
+	toggleRatingField,
+	rating,
+	handleSaveNewRating,
+	deleteRating,
+} = useProfileRating(card, emit)
 const ratingBtnText = computed(() => {
 	return isRatingFieldOpen.value
 		? 'Закрыть'

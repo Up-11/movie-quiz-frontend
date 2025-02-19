@@ -6,8 +6,6 @@ const { quiz } = defineProps<{ quiz: QuizCard }>()
 
 const btnText = computed(() => (quiz.completed ? 'Пройти еще раз' : 'Поехали!'))
 
-const emit = defineEmits(['start-completion'])
-
 const store = useQuizStore()
 
 const { startCompletion } = store
