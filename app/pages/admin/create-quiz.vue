@@ -6,7 +6,7 @@ definePageMeta({
 </script>
 
 <template>
-	<div>addd quiiiiiz</div>
+	<div>add quiz</div>
 </template>
 
 <style scoped></style>

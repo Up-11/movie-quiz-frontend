@@ -11,7 +11,7 @@ const value = ref<string>('')
 
 <template>
 	<section class="p-4 flex flex-col gap-5">
-		<h1 class="text-bold text-2xl">Все игроки</h1>
+		<h1 class="p-4 text-bold text-2xl">Все игроки</h1>
 		<div class="mt-10">
 			<UButtonGroup class="w-full flex h-10">
 				<UInput

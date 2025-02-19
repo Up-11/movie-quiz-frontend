@@ -3,8 +3,8 @@ export const ROUTES = {
 
 	allQuizzes: '/all-quizzes',
 
-	quiz: (id: string) => {
-		return `/quiz/${id}`
+	quiz: (name: string) => {
+		return `/quiz/${name}`
 	},
 
 	authorization: '/auth',

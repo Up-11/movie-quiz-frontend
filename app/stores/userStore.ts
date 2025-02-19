@@ -6,7 +6,7 @@ export const useUserStore = defineStore('UserStore', () => {
 		id: '123',
 		name: 'Гена букин',
 		email: 'sinBlyadi@gmail.com',
-		role: USER_ROLE.ADMIN,
+		role: USER_ROLE.USER,
 	})
 
 	const isAuth = computed(() => user.id !== null)

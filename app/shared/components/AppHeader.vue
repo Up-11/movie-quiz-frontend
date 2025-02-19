@@ -38,15 +38,6 @@ const userStore = useUserStore()
 
 		<nav class="flex max-md:hidden">
 			<div>
-				<UButton
-					size="lg"
-					variant="ghost"
-					:to="ROUTES.allQuizzes"
-					color="primary"
-					>Все викторины</UButton
-				>
-			</div>
-			<div>
 				<USlideover title="Профиль" v-if="userStore.isAuth">
 					<UButton size="lg" icon="uil:user" variant="ghost" color="primary"
 						>Профиль</UButton

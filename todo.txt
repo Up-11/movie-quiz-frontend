@@ -1,8 +1,9 @@
 FRONT
-[x] -  parralax effect on cards
+[x] -  parallax effect on cards
 [x] - profile page 
   [x] - stat 
 [x] - auth 
-[] - quiz complition 
+[] - quiz completion 
 [] - quiz creation 
 []  - admin
+[]  - rating from quiz page

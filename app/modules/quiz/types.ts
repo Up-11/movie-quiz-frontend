@@ -4,9 +4,25 @@ export type QuizCard = {
 	imageUrl: string
 	description: string
 	rating: number
-	usersComplitions: number
+	usersCompletions: number
 	questionsCount: number
 	film: string
-	completed: boolean
+	completed?: boolean
 	userRating?: number
+	questions: Question[]
+}
+
+export type AnswerVariant = {
+	id: string
+	variant: string
+	letter?: string
+}
+
+export type Question = {
+	id: string
+	imageUrl: string
+	description: string
+	question: string
+	variants: AnswerVariant[]
+	correctVariant: AnswerVariant
 }

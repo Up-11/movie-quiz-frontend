@@ -9,6 +9,7 @@ import type { IUser } from '~/shared/types/common.types'
 				<slot name="items" />
 			</div>
 			<UPopover
+				class="self-start"
 				:content="{
 					align: 'end',
 					side: 'bottom',
