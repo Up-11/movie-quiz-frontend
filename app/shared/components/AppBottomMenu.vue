@@ -4,10 +4,10 @@ import { ROUTES } from '../config/routes'
 
 <template>
 	<aside
-		class="fixed w-full bottom-0 h-16 p-3 pb-5 z-10 border-t border-zinc-200 bg-black/50 backdrop-blur-2xl"
+		class="fixed bottom-0 z-10 h-16 w-full border-t border-zinc-200 bg-black/50 p-3 pb-5 backdrop-blur-2xl"
 	>
 		<nav class="flex items-center justify-between gap-2">
-			<div class="flex flex-col justify-center items-center">
+			<div class="flex flex-col items-center justify-center">
 				<UButton
 					icon="uil:home-alt"
 					size="sm"
@@ -17,7 +17,7 @@ import { ROUTES } from '../config/routes'
 				/>
 				<p class="text-[10px] text-violet-200">Главная</p>
 			</div>
-			<div class="flex flex-col justify-center items-center">
+			<div class="flex flex-col items-center justify-center">
 				<UButton
 					icon="uil:chart"
 					size="sm"
@@ -27,7 +27,7 @@ import { ROUTES } from '../config/routes'
 				/>
 				<p class="text-[10px] text-violet-200">Викторины</p>
 			</div>
-			<div class="flex flex-col justify-center items-center">
+			<div class="flex flex-col items-center justify-center">
 				<UButton
 					size="sm"
 					variant="ghost"
@@ -37,7 +37,7 @@ import { ROUTES } from '../config/routes'
 				/>
 				<p class="text-[10px] text-violet-200">Игроки</p>
 			</div>
-			<div class="flex flex-col justify-center items-center">
+			<div class="flex flex-col items-center justify-center">
 				<UButton
 					size="sm"
 					icon="uil:plus"
@@ -49,7 +49,7 @@ import { ROUTES } from '../config/routes'
 			</div>
 			<ProfileModal>
 				<template #trigger>
-					<div class="flex flex-col justify-center items-center">
+					<div class="flex flex-col items-center justify-center">
 						<UButton icon="uil:pen" size="sm" variant="ghost" color="primary" />
 						<p class="text-[10px] text-violet-200">Профиль</p>
 					</div>
@@ -57,7 +57,7 @@ import { ROUTES } from '../config/routes'
 			</ProfileModal>
 			<QuitModal>
 				<template #trigger>
-					<div class="flex flex-col justify-center items-center">
+					<div class="flex flex-col items-center justify-center">
 						<UButton
 							icon="uil:user"
 							size="sm"

@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import { ref, onMounted } from 'vue'
-import { NuxtImg } from '#components'
 import type { QuizCard } from '../types'
 import VanillaTilt from 'vanilla-tilt'
 import { ROUTES } from '~/shared/config/routes'
@@ -18,7 +17,7 @@ onMounted(() => {
 			speed: 500,
 			glare: true,
 			'max-glare': 0.3,
-			scale: 1.05,
+			scale: 1.05
 		})
 	}
 })
@@ -27,7 +26,7 @@ onMounted(() => {
 <template>
 	<NuxtLink :to="ROUTES.quiz(card.id)">
 		<article
-			class="flex flex-col h-full border-2 shadow-2xl backdrop-blur-2xl bg-black/50 hover:border-violet-400 transition-all hover:shadow-violet-600 border-zinc-300 rounded-lg max-w-[350px] cursor-pointer relative"
+			class="relative flex h-full max-w-[350px] cursor-pointer flex-col rounded-lg border-2 border-zinc-300 bg-black/50 shadow-2xl backdrop-blur-2xl transition-all hover:border-violet-400 hover:shadow-violet-600"
 			ref="cardRef"
 		>
 			<UBadge
@@ -38,23 +37,23 @@ onMounted(() => {
 			>
 
 			<NuxtImg
-				class="rounded-tr-lg aspect-auto w-[313px] h-[200px] rounded-tl-lg object-fill"
+				class="aspect-auto h-[200px] w-[313px] rounded-tl-lg rounded-tr-lg object-fill"
 				width="100%"
 				loading="lazy"
 				height="auto"
 				:src="card.imageUrl"
 				:alt="card.name"
 			/>
-			<div class="p-4 flex flex-col gap-2 justify-between h-full">
-				<div class="flex gap-2 items-center justify-between">
+			<div class="flex h-full flex-col justify-between gap-2 p-4">
+				<div class="flex items-center justify-between gap-2">
 					<h1 class="font-bold">{{ card.name }}</h1>
-					<h1 class="font-bold text-violet-200 text-sm">{{ card.film }}</h1>
+					<h1 class="text-sm font-bold text-violet-200">{{ card.film }}</h1>
 				</div>
 				<p class="line-clamp-4">
 					{{ card.description }}
 				</p>
 				<USeparator class="mt-auto" />
-				<div class="flex gap-4 select-none mt-auto">
+				<div class="mt-auto flex gap-4 select-none">
 					<UTooltip text="Рейтинг">
 						<URating :number="card.rating" />
 					</UTooltip>

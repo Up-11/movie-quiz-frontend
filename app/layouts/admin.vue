@@ -35,18 +35,18 @@ useHead({
 </script>
 
 <template>
-	<div class="h-screen bg bg-center fixed inset-0 -z-10 bg-cover"></div>
+  <div class="h-screen bg bg-center fixed inset-0 -z-10 bg-cover" />
 
-	<div class="grid lg:grid-cols-[300px_1fr]">
-		<div>
-			<AppSidebar class="max-lg:hidden" />
-			<AppBottomMenu class="lg:hidden" />
-		</div>
+  <div class="grid lg:grid-cols-[300px_1fr]">
+    <div>
+      <AppSidebar class="max-lg:hidden" />
+      <AppBottomMenu class="lg:hidden" />
+    </div>
 
-		<main>
-			<slot />
-		</main>
-	</div>
+    <main>
+      <slot />
+    </main>
+  </div>
 </template>
 
 <style scoped>

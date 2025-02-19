@@ -1,15 +1,15 @@
 <script lang="ts" setup></script>
 
 <template>
-	<div class="text-white min-h-screen">
-		<div class="z-10">
-			<CompletionHeader />
-		</div>
-		<main class="z-10 h-screen pt-10 px-5 md:p-10 md:pt-12 flex flex-col gap-5">
-			<slot />
-		</main>
-		<div class="fixed inset-0 -z-10 bg bg-center bg-cover"></div>
-	</div>
+  <div class="text-white min-h-screen">
+    <div class="z-10">
+      <CompletionHeader />
+    </div>
+    <main class="z-10 h-screen pt-10 px-5 md:p-10 md:pt-12 flex flex-col gap-5">
+      <slot />
+    </main>
+    <div class="fixed inset-0 -z-10 bg bg-center bg-cover" />
+  </div>
 </template>
 
 <style scoped>

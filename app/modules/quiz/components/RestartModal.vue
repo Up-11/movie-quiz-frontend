@@ -17,7 +17,7 @@ const onClickContinueCompletion = () => {
 	<UModal
 		:dismissible="false"
 		:close="{
-			class: 'hidden',
+			class: 'hidden'
 		}"
 		title="Продолжить викторину?"
 		description="Вы уже начинали проходить эту викторину, вы хотите продолжить ее или начать заново"
@@ -27,17 +27,19 @@ const onClickContinueCompletion = () => {
 				<UButton
 					variant="subtle"
 					size="lg"
-					@click="onClickContinueCompletion"
 					color="success"
-					>Продолжить</UButton
+					@click="onClickContinueCompletion"
 				>
+					Продолжить
+				</UButton>
 				<UButton
-					@click="onClickRestartCompletion"
 					variant="subtle"
 					size="lg"
 					color="error"
-					>Начать заново</UButton
+					@click="onClickRestartCompletion"
 				>
+					Начать заново
+				</UButton>
 			</div>
 		</template>
 	</UModal>

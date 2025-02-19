@@ -23,12 +23,19 @@
 		"tailwindcss": "^4.0.6",
 		"vanilla-tilt": "^1.8.1",
 		"vue": "latest",
+		"vue-eslint-parser": "^9.4.3",
 		"vue-router": "latest",
 		"vue3-star-ratings": "^3.0.5",
 		"zod": "^3.24.2"
 	},
 	"devDependencies": {
+		"@typescript-eslint/eslint-plugin": "^8.24.1",
+		"@typescript-eslint/parser": "^8.24.1",
 		"@vueuse/nuxt": "^12.7.0",
+		"add": "^2.0.6",
+		"eslint": "^9.20.1",
+		"eslint-config-prettier": "^10.0.1",
+		"eslint-plugin-vue": "^9.32.0",
 		"prettier": "^3.5.1",
 		"prettier-plugin-tailwindcss": "^0.6.11"
 	}
