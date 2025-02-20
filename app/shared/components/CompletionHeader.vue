@@ -14,7 +14,7 @@ const {
 
 <template>
 	<header
-		class="fixed inset-x-0 flex items-center justify-between border-b border-b-zinc-300 bg-black/50 p-2 backdrop-blur-2xl"
+		class="fixed inset-x-0 z-200 flex items-center justify-between border-b border-b-zinc-300 bg-black/50 p-2 backdrop-blur-2xl"
 	>
 		<div class="flex items-center gap-3">
 			<h1 class="font-bold">

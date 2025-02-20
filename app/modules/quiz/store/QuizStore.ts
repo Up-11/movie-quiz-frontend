@@ -12,6 +12,7 @@ interface ICurrentQuiz {
 interface CachedQuiz {
 	id: string
 	currentIndex: number
+	lastAnswer?: IUserAnswer
 }
 
 const InitialCurrentQuiz: ICurrentQuiz = {
@@ -28,6 +29,7 @@ enum QUIZ_STATUS {
 }
 
 interface IUserAnswer {
+	quizId: string
 	answer: AnswerVariant
 	status: QUIZ_STATUS
 }
@@ -44,6 +46,13 @@ export const useQuizStore = defineStore('QuizStore', () => {
 	const showCorrectAnswer = computed(() => {
 		if (userAnswer.value) return currentQuiz.correctVariant!.id
 	})
+
+	const clearCachedAnswer = () => {
+		const cachedQuiz = cachedQuizzes.find(el => el.id === currentQuiz.id)
+		if (cachedQuiz) {
+			cachedQuiz.lastAnswer = undefined
+		}
+	}
 
 	const isAnswerCorrect = (variant: AnswerVariant): boolean => {
 		if (!userAnswer.value || !currentQuiz.correctVariant) return false
@@ -70,11 +79,23 @@ export const useQuizStore = defineStore('QuizStore', () => {
 			userAnswer.value = answer
 
 			userAnswerList.value.push({
+				quizId: currentQuiz.id,
 				answer,
 				status: isAnswerCorrect(answer)
 					? QUIZ_STATUS.CORRECT
 					: QUIZ_STATUS.FAILED
 			})
+
+			const cachedQuiz = cachedQuizzes.find(el => el.id === currentQuiz.id)
+			if (cachedQuiz) {
+				cachedQuiz.lastAnswer = {
+					quizId: currentQuiz.id,
+					answer,
+					status: isAnswerCorrect(answer)
+						? QUIZ_STATUS.CORRECT
+						: QUIZ_STATUS.FAILED
+				}
+			}
 		}
 	}
 
@@ -88,6 +109,10 @@ export const useQuizStore = defineStore('QuizStore', () => {
 		const cachedQuiz = cachedQuizzes.find(el => el.id === currentQuiz.id)
 		if (cachedQuiz) {
 			currentQuiz.currentIndex = cachedQuiz.currentIndex
+
+			if (cachedQuiz.lastAnswer) {
+				userAnswer.value = cachedQuiz.lastAnswer.answer
+			}
 		}
 	}
 
@@ -97,6 +122,7 @@ export const useQuizStore = defineStore('QuizStore', () => {
 
 	const nextQuestion = () => {
 		if (currentQuiz.currentIndex < currentQuiz.questionsCount - 1) {
+			clearCachedAnswer()
 			userAnswer.value = null
 			currentQuiz.currentIndex++
 			const cachedQuiz = cachedQuizzes.find(el => el.id === currentQuiz.id)
@@ -115,6 +141,7 @@ export const useQuizStore = defineStore('QuizStore', () => {
 
 	const clearIsStarted = () => {
 		isStarted.value = false
+
 		userAnswer.value = null
 	}
 
@@ -175,6 +202,7 @@ export const useQuizStore = defineStore('QuizStore', () => {
 		hasAnswer,
 		showCorrectAnswer,
 		userAnswerList,
-		isUserVariantCorrect
+		isUserVariantCorrect,
+		clearCachedAnswer
 	}
 })

@@ -26,7 +26,7 @@ const btnText = computed(() => (isLastQuestion.value ? 'Завершить' : '�
 
 <template>
 	<div :class="'h-full flex-col items-center justify-center gap-5'">
-		<div class="mt-5 flex items-center justify-center gap-4">
+		<div class="relative mt-5 flex items-center justify-center gap-4">
 			<NuxtImg
 				:src="question.imageUrl"
 				class="rounded-sm"
@@ -34,7 +34,20 @@ const btnText = computed(() => (isLastQuestion.value ? 'Завершить' : '�
 				alt="Question Image"
 			/>
 		</div>
-		<h1 class="mt-3 text-3xl font-bold">{{ question.question }}</h1>
+		<div class="flex items-center gap-4">
+			<h1 class="mt-3 text-3xl font-bold">{{ question.question }}</h1>
+			<UPopover v-if="hasAnswer">
+				<UButton
+					variant="soft"
+					size="lg"
+					icon="uil:question-circle"
+					class="self-center"
+				/>
+				<template #content>
+					<div class="p-4">{{ question.description }}</div>
+				</template>
+			</UPopover>
+		</div>
 		<div class="mt-5 flex flex-col items-center justify-center gap-5">
 			<VariantComponent
 				v-for="item in itemsWithLetters"

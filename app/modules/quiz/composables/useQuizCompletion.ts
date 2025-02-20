@@ -24,7 +24,8 @@ export const useQuizCompletion = () => {
 		setCorrectVariant,
 		createUserAnswer,
 		isAnswerCorrect,
-		isAnswerFailed
+		isAnswerFailed,
+		clearCachedAnswer
 	} = store
 
 	return {
@@ -46,6 +47,7 @@ export const useQuizCompletion = () => {
 		isAnswerFailed,
 		hasAnswer,
 		showCorrectAnswer,
-		isUserVariantCorrect
+		isUserVariantCorrect,
+		clearCachedAnswer
 	}
 }
