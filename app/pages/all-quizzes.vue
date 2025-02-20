@@ -51,10 +51,15 @@ useHead({
 })
 </script>
 <template>
-	<section class="flex mt-5 flex-col gap-3">
-		<VTitle :title="'Все Викторины '" />
-		<div><QuzzCardList :component="QuizCard" :quizes="quizCards" /></div>
-	</section>
+  <section class="flex mt-5 flex-col gap-3">
+    <VTitle :title="'Все Викторины '" />
+    <div>
+      <QuzzCardList
+        :component="QuizCard"
+        :quizes="quizCards"
+      />
+    </div>
+  </section>
 </template>
 
 <style scoped></style>
