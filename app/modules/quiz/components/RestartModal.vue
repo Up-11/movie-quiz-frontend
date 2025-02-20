@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const modal = useModal()
 
-const { restartCompletion, isStarted } = useQuizCompletion()
+const { restartCompletion, continueCompletion } = useQuizCompletion()
 
 const onClickRestartCompletion = () => {
 	modal.close()
@@ -10,7 +10,7 @@ const onClickRestartCompletion = () => {
 
 const onClickContinueCompletion = () => {
 	modal.close()
-	isStarted.value = true
+	continueCompletion()
 }
 </script>
 <template>

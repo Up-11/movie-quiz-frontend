@@ -3,14 +3,28 @@ import { useQuizStore } from '../store/QuizStore'
 export const useQuizCompletion = () => {
 	const store = useQuizStore()
 
-	const { currentQuiz, isStarted } = storeToRefs(store)
+	const {
+		currentQuiz,
+		isStarted,
+		questionIndex,
+		isLastQuestion,
+		hasAnswer,
+		showCorrectAnswer,
+		isUserVariantCorrect
+	} = storeToRefs(store)
 	const {
 		startCompletion,
 		restartCompletion,
 		updateCurrentQuiz,
 		clearCurrentQuiz,
 		clearIsStarted,
-		checkIsStarted
+		checkIsStarted,
+		continueCompletion,
+		nextQuestion,
+		setCorrectVariant,
+		createUserAnswer,
+		isAnswerCorrect,
+		isAnswerFailed
 	} = store
 
 	return {
@@ -21,6 +35,17 @@ export const useQuizCompletion = () => {
 		clearIsStarted,
 		checkIsStarted,
 		currentQuiz,
-		isStarted
+		isStarted,
+		questionIndex,
+		continueCompletion,
+		nextQuestion,
+		isLastQuestion,
+		setCorrectVariant,
+		createUserAnswer,
+		isAnswerCorrect,
+		isAnswerFailed,
+		hasAnswer,
+		showCorrectAnswer,
+		isUserVariantCorrect
 	}
 }

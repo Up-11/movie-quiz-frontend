@@ -1,10 +1,15 @@
 <script lang="ts" setup>
 import { ROUTES } from '../config/routes'
 
-const { currentQuiz, isStarted, startCompletion, restartCompletion } =
-	useQuizCompletion()
-
-const value = ref<number>(7)
+const {
+	currentQuiz,
+	isStarted,
+	startCompletion,
+	restartCompletion,
+	questionIndex,
+	nextQuestion,
+	hasAnswer
+} = useQuizCompletion()
 </script>
 
 <template>
@@ -15,14 +20,23 @@ const value = ref<number>(7)
 			<h1 class="font-bold">
 				{{ currentQuiz.name }}
 			</h1>
-			<div
-				v-if="isStarted"
-				class="flex w-90 flex-col items-center justify-center"
-			>
-				<p class="font-bold text-indigo-200">
-					Вопрос 1/{{ currentQuiz.questionsCount }}
-				</p>
-				<UProgress v-model="value" :max="currentQuiz.questionsCount" />
+			<div v-if="isStarted" class="flex items-center gap-3">
+				<div class="flex w-60 flex-col items-center self-center">
+					<p class="font-bold text-indigo-200">
+						Вопрос {{ questionIndex }}/{{ currentQuiz.questionsCount }}
+					</p>
+					<UProgress
+						v-model="questionIndex"
+						:max="currentQuiz.questionsCount"
+					/>
+				</div>
+				<UButton
+					:disabled="!hasAnswer"
+					@click="nextQuestion"
+					class="self-end"
+					icon="i-lucide-arrow-right"
+					variant="ghost"
+				/>
 			</div>
 			<UButton v-else variant="soft" @click="startCompletion"> Начать </UButton>
 		</div>

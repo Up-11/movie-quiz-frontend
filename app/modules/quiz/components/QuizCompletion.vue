@@ -1,12 +1,27 @@
 <script lang="ts" setup>
 import { assignLettersToItems } from '~/shared/utils/common'
 import type { Question } from '../types'
+import { useQuizCompletion } from '../composables/useQuizCompletion'
 
-const { question } = defineProps<{
+const props = defineProps<{
 	question: Question
 }>()
 
-const itemsWithLetters = assignLettersToItems(question.variants)
+const itemsWithLetters = computed(() =>
+	assignLettersToItems(props.question.variants)
+)
+
+const {
+	nextQuestion,
+	isLastQuestion,
+	createUserAnswer,
+	isAnswerFailed,
+	hasAnswer,
+	showCorrectAnswer,
+	isAnswerCorrect
+} = useQuizCompletion()
+
+const btnText = computed(() => (isLastQuestion.value ? 'Завершить' : 'Дальше!'))
 </script>
 
 <template>
@@ -20,13 +35,25 @@ const itemsWithLetters = assignLettersToItems(question.variants)
 			/>
 		</div>
 		<h1 class="mt-3 text-3xl font-bold">{{ question.question }}</h1>
-		<div class="mt-5 flex flex-col gap-5">
+		<div class="mt-5 flex flex-col items-center justify-center gap-5">
 			<VariantComponent
 				v-for="item in itemsWithLetters"
+				@create-answer="createUserAnswer"
+				:has-answer="hasAnswer"
 				:key="item.id"
-				:text="item.variant"
-				:letter="item.letter!"
+				:variant="item"
+				:should-show-confetti="isAnswerCorrect(item)"
+				:is-correct="showCorrectAnswer === item.id"
+				:is-failed="isAnswerFailed(item)"
 			/>
+			<UButton
+				:disabled="!hasAnswer"
+				@click="nextQuestion"
+				variant="soft"
+				class="mb-20 rounded-2xl px-24 py-4 text-2xl"
+			>
+				{{ btnText }}
+			</UButton>
 		</div>
 	</div>
 </template>

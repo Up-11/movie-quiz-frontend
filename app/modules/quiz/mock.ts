@@ -10,9 +10,9 @@ export const mockQuestions: Question[] = [
 			{ id: '1', variant: 'Джордж Вашингтон' },
 			{ id: '2', variant: 'Авраам Линкольн' },
 			{ id: '3', variant: 'Томас Джефферсон' },
-			{ id: '4', variant: 'Бенджамин Франклин' },
+			{ id: '4', variant: 'Бенджамин Франклин' }
 		],
-		correctVariant: { id: '1', variant: 'Джордж Вашингтон' },
+		correctVariant: { id: '1', variant: 'Джордж Вашингтон' }
 	},
 	{
 		id: '2',
@@ -24,9 +24,9 @@ export const mockQuestions: Question[] = [
 			{ id: '1', variant: 'Атлантический океан' },
 			{ id: '2', variant: 'Тихий океан' },
 			{ id: '3', variant: 'Индийский океан' },
-			{ id: '4', variant: 'Северный Ледовитый океан' },
+			{ id: '4', variant: 'Северный Ледовитый океан' }
 		],
-		correctVariant: { id: '2', variant: 'Тихий океан' },
+		correctVariant: { id: '2', variant: 'Тихий океан' }
 	},
 	{
 		id: '3',
@@ -38,9 +38,9 @@ export const mockQuestions: Question[] = [
 			{ id: '1', variant: 'Кислород' },
 			{ id: '2', variant: 'Азот' },
 			{ id: '3', variant: 'Водород' },
-			{ id: '4', variant: 'Углерод' },
+			{ id: '4', variant: 'Углерод' }
 		],
-		correctVariant: { id: '1', variant: 'Кислород' },
+		correctVariant: { id: '1', variant: 'Кислород' }
 	},
 	{
 		id: '4',
@@ -50,11 +50,11 @@ export const mockQuestions: Question[] = [
 		question: 'Кто написал роман "Война и мир"?',
 		variants: [
 			{ id: '1', variant: 'Фёдор Достоевский' },
-			{ id: '2', variant: 'Лев Толстой' },
+			{ id: '4', variant: 'Лев Толстой' },
 			{ id: '3', variant: 'Александр Пушкин' },
-			{ id: '4', variant: 'Николай Гоголь' },
+			{ id: '2', variant: 'Николай Гоголь' }
 		],
-		correctVariant: { id: '2', variant: 'Лев Толстой' },
+		correctVariant: { id: '4', variant: 'Лев Толстой' }
 	},
 	{
 		id: '5',
@@ -66,10 +66,10 @@ export const mockQuestions: Question[] = [
 			{ id: '1', variant: 'Золото' },
 			{ id: '2', variant: 'Серебро' },
 			{ id: '3', variant: 'Медь' },
-			{ id: '4', variant: 'Железо' },
+			{ id: '4', variant: 'Железо' }
 		],
-		correctVariant: { id: '1', variant: 'Золото' },
-	},
+		correctVariant: { id: '1', variant: 'Золото' }
+	}
 ]
 
 export const quizCards: QuizCard[] = [
@@ -82,12 +82,12 @@ export const quizCards: QuizCard[] = [
 			'Тест на знание фильма "Начало" (Inception). Проверьте, насколько хорошо вы помните сюжет и детали.',
 		rating: 4.8,
 		usersCompletions: 12034,
-		questionsCount: 15,
+		questionsCount: mockQuestions.length,
 		userRating: 2.9,
 
 		film: 'Inception',
 		completed: true,
-		questions: mockQuestions,
+		questions: mockQuestions
 	},
 	{
 		id: '2',
@@ -99,10 +99,10 @@ export const quizCards: QuizCard[] = [
 		rating: 4.9,
 		userRating: 4.9,
 		usersCompletions: 9856,
-		questionsCount: 12,
+		questionsCount: mockQuestions.length,
 		film: 'Interstellar',
 		completed: false,
-		questions: mockQuestions,
+		questions: mockQuestions
 	},
 	{
 		id: '3',
@@ -113,10 +113,10 @@ export const quizCards: QuizCard[] = [
 			'Проверьте свои знания о культовом фильме "Матрица". Синий или красный?',
 		rating: 4.7,
 		usersCompletions: 15021,
-		questionsCount: 20,
+		questionsCount: mockQuestions.length,
 		film: 'The Matrix',
 		completed: false,
-		questions: mockQuestions,
+		questions: mockQuestions
 	},
 	{
 		id: '021489',
@@ -127,10 +127,10 @@ export const quizCards: QuizCard[] = [
 			'Тест по фильму "Темный рыцарь". Знаете ли вы все о Джокере и Бэтмене?',
 		rating: 4.9,
 		usersCompletions: 13287,
-		questionsCount: 18,
+		questionsCount: mockQuestions.length,
 		film: 'The Dark Knight',
 		completed: false,
-		questions: mockQuestions,
+		questions: mockQuestions
 	},
 	{
 		id: '821',
@@ -141,10 +141,10 @@ export const quizCards: QuizCard[] = [
 			'Тест по фильму "Темный рыцарь". Знаете ли вы все о Джокере и Бэтмене?',
 		rating: 4.9,
 		usersCompletions: 13287,
-		questionsCount: 18,
+		questionsCount: mockQuestions.length,
 		film: 'The Dark Knight',
 		completed: false,
-		questions: mockQuestions,
+		questions: mockQuestions
 	},
 	{
 		id: '9',
@@ -155,10 +155,10 @@ export const quizCards: QuizCard[] = [
 			'Тест по фильму "Темный рыцарь". Знаете ли вы все о Джокере и Бэтмене?',
 		rating: 4.9,
 		usersCompletions: 13287,
-		questionsCount: 18,
+		questionsCount: mockQuestions.length,
 		film: 'The Dark Knight',
 		completed: false,
-		questions: mockQuestions,
+		questions: mockQuestions
 	},
 	{
 		id: '14',
@@ -169,10 +169,10 @@ export const quizCards: QuizCard[] = [
 			'Тест по фильму "Темный рыцарь". Знаете ли вы все о Джокере и Бэтмене?',
 		rating: 4.9,
 		usersCompletions: 13287,
-		questionsCount: 18,
+		questionsCount: mockQuestions.length,
 		film: 'The Dark Knight',
 		completed: false,
-		questions: mockQuestions,
+		questions: mockQuestions
 	},
 	{
 		id: '123e4567-e89b-12d3-a456-426614174010',
@@ -183,9 +183,9 @@ export const quizCards: QuizCard[] = [
 			'Тест по фильму "Темный рыцарь". Знаете ли вы все о Джокере и Бэтмене 1	23213?',
 		rating: 4.9,
 		usersCompletions: 13287,
-		questionsCount: 18,
+		questionsCount: mockQuestions.length,
 		film: 'The Dark Knight',
 		completed: true,
-		questions: mockQuestions,
-	},
+		questions: mockQuestions
+	}
 ]
