@@ -30,7 +30,8 @@ const {
 	clearIsStarted,
 	isStarted,
 	currentQuiz: currQuiz,
-	setCorrectVariant
+	setCorrectVariant,
+	checkIsFinished
 } = useQuizCompletion()
 
 watch(
@@ -46,7 +47,8 @@ watch(
 onMounted(() => {
 	if (!currentQuiz.value) return
 	updateCurrentQuiz(currentQuiz.value)
-	if (checkIsStarted()) {
+	if (checkIsStarted(currQuiz.value)) {
+		if (checkIsFinished(currQuiz.value)) return
 		modal.open(RestartModal)
 	}
 })
@@ -62,11 +64,24 @@ onUnmounted(() => {
 		<Transition v-if="currentQuiz && !isStarted" name="bounce" appear>
 			<QuizPreview v-if="currentQuiz && !isStarted" :quiz="currentQuiz" />
 		</Transition>
-		<Transition v-else-if="currentQuiz" name="bounce" appear mode="out-in">
+		<Transition
+			v-else-if="currentQuiz && !currQuiz.isFinished"
+			name="bounce"
+			appear
+			mode="out-in"
+		>
 			<QuizCompletion
 				:key="currQuiz.currentIndex"
 				:question="currentQuiz?.questions[currQuiz.currentIndex]!"
 			/>
+		</Transition>
+		<Transition
+			v-else-if="currQuiz.isFinished"
+			name="bounce"
+			appear
+			mode="out-in"
+		>
+			<QuizFinalMenu :quiz="currentQuiz!" />
 		</Transition>
 	</div>
 </template>

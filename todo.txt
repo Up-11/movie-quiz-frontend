@@ -3,7 +3,16 @@ FRONT
 [x] - profile page 
   [x] - stat 
 [x] - auth 
-[] - quiz completion 
-[] - quiz creation 
-[]  - admin
-[]  - rating from quiz page
+[x] - quiz completion 
+[x] - quiz creation 
+[x]  - admin
+[x]  - rating from quiz page
+[x]  - clearCache 
+[-]  - saveCache 
+[x]  - think about usersAnswers 
+[x] - stat 
+   [x] - completed questions 
+   [x] - failed questions 
+   [x] - percents questions 
+   [x] -  questions 
+   

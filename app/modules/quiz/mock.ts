@@ -7,12 +7,12 @@ export const mockQuestions: Question[] = [
 		description: 'Вопрос по истории',
 		question: 'Кто был первым президентом США?',
 		variants: [
-			{ id: '1', variant: 'Джордж Вашингтон' },
-			{ id: '2', variant: 'Авраам Линкольн' },
-			{ id: '3', variant: 'Томас Джефферсон' },
-			{ id: '4', variant: 'Бенджамин Франклин' }
+			{ id: '1-1', variant: 'Джордж Вашингтон' },
+			{ id: '1-2', variant: 'Авраам Линкольн' },
+			{ id: '1-3', variant: 'Томас Джефферсон' },
+			{ id: '1-4', variant: 'Бенджамин Франклин' }
 		],
-		correctVariant: { id: '1', variant: 'Джордж Вашингтон' }
+		correctVariant: { id: '1-1', variant: 'Джордж Вашингтон' }
 	},
 	{
 		id: '2',
@@ -21,12 +21,12 @@ export const mockQuestions: Question[] = [
 		description: 'Вопрос по географии',
 		question: 'Какой океан самый большой по площади?',
 		variants: [
-			{ id: '1', variant: 'Атлантический океан' },
-			{ id: '2', variant: 'Тихий океан' },
-			{ id: '3', variant: 'Индийский океан' },
-			{ id: '4', variant: 'Северный Ледовитый океан' }
+			{ id: '2-1', variant: 'Атлантический океан' },
+			{ id: '2-2', variant: 'Тихий океан' },
+			{ id: '2-3', variant: 'Индийский океан' },
+			{ id: '2-4', variant: 'Северный Ледовитый океан' }
 		],
-		correctVariant: { id: '2', variant: 'Тихий океан' }
+		correctVariant: { id: '2-2', variant: 'Тихий океан' }
 	},
 	{
 		id: '3',
@@ -35,43 +35,42 @@ export const mockQuestions: Question[] = [
 		description: 'Вопрос по науке',
 		question: 'Какой химический элемент обозначается символом "O"?',
 		variants: [
-			{ id: '1', variant: 'Кислород' },
-			{ id: '2', variant: 'Азот' },
-			{ id: '3', variant: 'Водород' },
-			{ id: '4', variant: 'Углерод' }
+			{ id: '3-1', variant: 'Кислород' },
+			{ id: '3-2', variant: 'Азот' },
+			{ id: '3-3', variant: 'Водород' },
+			{ id: '3-4', variant: 'Углерод' }
 		],
-		correctVariant: { id: '1', variant: 'Кислород' }
+		correctVariant: { id: '3-1', variant: 'Кислород' }
 	},
 	{
 		id: '4',
 		imageUrl:
-			'	https://pikuco.ru/upload/test_stable/26a/26ace83cb0b49a12a339616175d0097e.webp',
+			'https://pikuco.ru/upload/test_stable/26a/26ace83cb0b49a12a339616175d0097e.webp',
 		description: 'Вопрос по литературе',
 		question: 'Кто написал роман "Война и мир"?',
 		variants: [
-			{ id: '1', variant: 'Фёдор Достоевский' },
-			{ id: '4', variant: 'Лев Толстой' },
-			{ id: '3', variant: 'Александр Пушкин' },
-			{ id: '2', variant: 'Николай Гоголь' }
+			{ id: '4-1', variant: 'Фёдор Достоевский' },
+			{ id: '4-2', variant: 'Лев Толстой' },
+			{ id: '4-3', variant: 'Александр Пушкин' },
+			{ id: '4-4', variant: 'Николай Гоголь' }
 		],
-		correctVariant: { id: '4', variant: 'Лев Толстой' }
+		correctVariant: { id: '4-2', variant: 'Лев Толстой' }
 	},
 	{
 		id: '5',
 		imageUrl:
-			'	https://pikuco.ru/upload/test_stable/242/242e4b470bc8d5a78fe8d965301a0df7.webp',
+			'https://pikuco.ru/upload/test_stable/242/242e4b470bc8d5a78fe8d965301a0df7.webp',
 		description: 'Вопрос по химии',
 		question: 'Как называется химический элемент с символом "Au"?',
 		variants: [
-			{ id: '1', variant: 'Золото' },
-			{ id: '2', variant: 'Серебро' },
-			{ id: '3', variant: 'Медь' },
-			{ id: '4', variant: 'Железо' }
+			{ id: '5-1', variant: 'Золото' },
+			{ id: '5-2', variant: 'Серебро' },
+			{ id: '5-3', variant: 'Медь' },
+			{ id: '5-4', variant: 'Железо' }
 		],
-		correctVariant: { id: '1', variant: 'Золото' }
+		correctVariant: { id: '5-1', variant: 'Золото' }
 	}
 ]
-
 export const quizCards: QuizCard[] = [
 	{
 		id: '123e4567-e89b-12d3-a456-426614174000',

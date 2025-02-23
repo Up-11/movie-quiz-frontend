@@ -20,8 +20,13 @@ const {
 			<h1 class="font-bold">
 				{{ currentQuiz.name }}
 			</h1>
-			<div v-if="isStarted" class="flex items-center gap-3">
-				<div class="flex w-60 flex-col items-center self-center">
+			<div
+				v-if="isStarted && !currentQuiz.isFinished"
+				class="flex items-center gap-3"
+			>
+				<div
+					class="flex w-60 cursor-default flex-col items-center self-center select-none"
+				>
 					<p class="font-bold text-indigo-200">
 						Вопрос {{ questionIndex }}/{{ currentQuiz.questionsCount }}
 					</p>
@@ -38,6 +43,9 @@ const {
 					variant="ghost"
 				/>
 			</div>
+			<h1 v-else-if="currentQuiz.isFinished" class="font-bold text-violet-200">
+				Викторина пройдена!
+			</h1>
 			<UButton v-else variant="soft" @click="startCompletion"> Начать </UButton>
 		</div>
 

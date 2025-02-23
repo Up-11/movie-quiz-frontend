@@ -1,7 +1,9 @@
+import { useQuizCacheStore } from '../store/QuizCacheStore'
 import { useQuizStore } from '../store/QuizStore'
 
 export const useQuizCompletion = () => {
-	const store = useQuizStore()
+	const quizStore = useQuizStore()
+	const quizCacheStore = useQuizCacheStore()
 
 	const {
 		currentQuiz,
@@ -10,23 +12,32 @@ export const useQuizCompletion = () => {
 		isLastQuestion,
 		hasAnswer,
 		showCorrectAnswer,
-		isUserVariantCorrect
-	} = storeToRefs(store)
+		isUserVariantCorrect,
+		correctAnswers,
+		failedAnswers,
+		currentQuizAnswerList
+	} = storeToRefs(quizStore)
 	const {
 		startCompletion,
 		restartCompletion,
 		updateCurrentQuiz,
 		clearCurrentQuiz,
 		clearIsStarted,
-		checkIsStarted,
 		continueCompletion,
 		nextQuestion,
 		setCorrectVariant,
 		createUserAnswer,
 		isAnswerCorrect,
 		isAnswerFailed,
-		clearCachedAnswer
-	} = store
+		clearUserAnswers
+	} = quizStore
+
+	const {
+		clearCachedAnswer,
+		checkIsStarted,
+		checkIsFinished,
+		deleteCachedQuizByQuiz
+	} = quizCacheStore
 
 	return {
 		startCompletion,
@@ -48,6 +59,12 @@ export const useQuizCompletion = () => {
 		hasAnswer,
 		showCorrectAnswer,
 		isUserVariantCorrect,
-		clearCachedAnswer
+		clearCachedAnswer,
+		correctAnswers,
+		failedAnswers,
+		currentQuizAnswerList,
+		clearUserAnswers,
+		checkIsFinished,
+		deleteCachedQuizByQuiz
 	}
 }

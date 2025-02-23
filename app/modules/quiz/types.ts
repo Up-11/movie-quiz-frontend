@@ -26,3 +26,29 @@ export type Question = {
 	variants: AnswerVariant[]
 	correctVariant: AnswerVariant
 }
+
+export interface CachedQuiz {
+	id: string
+	currentIndex: number
+	lastAnswer?: IUserAnswer
+	isFinished?: boolean
+}
+
+export interface IUserAnswer {
+	quizId: string
+	answer: AnswerVariant
+	status: QUIZ_STATUS
+}
+export enum QUIZ_STATUS {
+	CORRECT,
+	FAILED
+}
+
+export interface ICurrentQuiz {
+	id: string
+	name: string
+	questionsCount: number
+	currentIndex: number
+	correctVariant: AnswerVariant | null
+	isFinished: boolean
+}

@@ -1,14 +1,10 @@
 <script lang="ts" setup>
-import { useQuizStore } from '../store/QuizStore'
 import type { QuizCard } from '../types'
 
 const { quiz } = defineProps<{ quiz: QuizCard }>()
 
 const btnText = computed(() => (quiz.completed ? 'Пройти еще раз' : 'Поехали!'))
-
-const store = useQuizStore()
-
-const { startCompletion } = store
+const { startCompletion } = useQuizCompletion()
 </script>
 
 <template>
