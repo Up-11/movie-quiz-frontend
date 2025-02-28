@@ -47,5 +47,10 @@ export default defineNuxtConfig({
 			]
 		},
 		families: [{ name: 'Nunito', provider: 'google' }]
+	},
+	runtimeConfig: {
+		public: {
+			apiUrl: process.env.NUXT_PUBLIC_API_URL
+		}
 	}
 })

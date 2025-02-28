@@ -50,6 +50,7 @@ const { handleFileChange } = useFileUploading()
 				@change="e => handleFileChange(e, toRef(store.newQuiz, 'imageUrl'))"
 			/>
 			<NuxtImg
+				v-if="store.newQuiz.imageUrl"
 				class="col-start-3 h-60 w-full self-end rounded-lg object-contain"
 				:src="store.newQuiz.imageUrl"
 				width="300"

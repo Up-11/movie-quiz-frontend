@@ -37,7 +37,7 @@ onMounted(() => {
 			>
 
 			<NuxtImg
-				class="aspect-auto h-[200px] w-[313px] rounded-tl-lg rounded-tr-lg object-fill"
+				class="aspect-auto rounded-tl-lg rounded-tr-lg object-fill"
 				width="100%"
 				loading="lazy"
 				height="auto"

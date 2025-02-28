@@ -15,4 +15,9 @@ FRONT
    [x] - failed questions 
    [x] - percents questions 
    [x] -  questions 
+[x] - add name to login btw
+[] - admin can delete a self acc
+[] - add new button
+[] - deleteSelfAcc
+[] - searchToAdmin
    

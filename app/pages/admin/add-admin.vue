@@ -1,42 +1,69 @@
 <script lang="ts" setup>
+import { AdminService } from '~/modules/admin/service/admin.service'
+import type { IUserDto } from '~/modules/admin/service/admin.service.dto'
 import { ROUTES } from '~/shared/config/routes'
 import { mockUsers } from '~/shared/mock/mock'
+import { USER_ROLE } from '~/shared/types/common.types'
 
 definePageMeta({
 	title: 'Добавить администратора',
-	layout: 'admin',
+	layout: 'admin'
 })
+
+const admins = ref<IUserDto[]>([])
+const searchTerm = ref<string>('')
+const isSearching = ref<boolean>(false)
+
+const { data, fetch, isLoading } = useQuery({
+	queryFn: () => AdminService.getUsers(USER_ROLE.ADMIN, searchTerm.value),
+	enabled: true,
+	onSuccess(data) {
+		admins.value = data.data
+	}
+})
+watchDebounced(
+	searchTerm,
+	async () => {
+		isSearching.value = true
+		await fetch()
+		isSearching.value = false
+	},
+	{ debounce: 500, maxWait: 1000 }
+)
 </script>
 
 <template>
-  <section class="p-4 flex flex-col gap-5">
-    <header class="p-4 flex justify-between">
-      <h1 class="text-bold text-2xl">
-        Администраторы
-      </h1>
-      <AddAdminModal>
-        <template #trigger>
-          <UButton
-            variant="soft"
-            icon="uil:plus"
-          >
-            Добавить
-          </UButton>
-        </template>
-      </AddAdminModal>
-    </header>
+	<section class="flex flex-col gap-5 p-4">
+		<header class="flex justify-between p-4">
+			<h1 class="text-bold text-2xl">Администраторы</h1>
+			<AddAdminModal>
+				<template #trigger>
+					<UButton variant="soft" icon="uil:plus"> Добавить </UButton>
+				</template>
+			</AddAdminModal>
+		</header>
 
-    <div class="flex flex-col lg:max-w-[95%] w-full self-center gap-2">
-      <AdminCard
-        v-for="user in mockUsers.slice(0, 3)"
-        :key="user.email"
-      >
-        <template #items>
-          <AdminUserCard :user="user" />
-        </template>
-      </AdminCard>
-    </div>
-  </section>
+		<div class="flex w-full flex-col gap-2 self-center lg:max-w-[95%]">
+			<USkeleton
+				v-if="isLoading && !isSearching"
+				v-for="i in 5"
+				:key="i"
+				class="h-20"
+			/>
+			<div v-else-if="isSearching" class="flex justify-center">
+				<ULoader />
+			</div>
+			<AdminCard
+				v-else-if="!isLoading"
+				v-for="admin in admins"
+				:key="admin.email"
+			>
+				<template #items>
+					<AdminUserCard :user="admin" />
+				</template>
+			</AdminCard>
+		</div>
+	</section>
 </template>
 
 <style scoped></style>

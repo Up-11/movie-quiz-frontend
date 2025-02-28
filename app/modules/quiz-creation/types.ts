@@ -1,5 +1,3 @@
-import type { Question } from '../quiz/types'
-
 export type QuizCreation = {
 	id: string
 	name: string

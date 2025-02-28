@@ -26,7 +26,6 @@ export type Question = {
 	variants: AnswerVariant[]
 	correctVariant: AnswerVariant
 }
-
 export interface CachedQuiz {
 	id: string
 	currentIndex: number

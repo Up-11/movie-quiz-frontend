@@ -2,15 +2,15 @@ import type { FormSubmitEvent } from '@nuxt/ui'
 import { type EditProfileSchema } from '../schemas/edit-profile.schema'
 
 export const useUserProfileForm = () => {
-	const store = useUserStore()
+	const store = useAuthStore()
 
-	const { user } = store
+	const { user, handleLogout } = store
 
 	const state = reactive<Partial<EditProfileSchema>>({
 		email: user.email || '',
 		password: '',
 		confirmPassword: '',
-		name: user.name || '',
+		name: user.name || ''
 	})
 
 	const toast = useToast()
@@ -19,10 +19,10 @@ export const useUserProfileForm = () => {
 		toast.add({
 			title: 'Success',
 			description: 'The form has been submitted.',
-			color: 'success',
+			color: 'success'
 		})
 		console.log(event.data)
 	}
 
-	return { state, onSubmit, user }
+	return { state, onSubmit, user, handleLogout }
 }

@@ -1,24 +1,51 @@
 <script setup lang="ts">
 import type { FormSubmitEvent } from '@nuxt/ui'
 import { loginSchema, type LoginSchema } from '../schemas/login.schema'
+import { AuthService } from '../service/auth.service'
+import { ROUTES } from '~/shared/config/routes'
+import { USER_ROLE } from '~/shared/types/common.types'
 
 const state = reactive<Partial<LoginSchema>>({
+	name: '',
 	email: '',
-	password: '',
+	password: ''
 })
 
 const toast = useToast()
+
+const router = useRouter()
+
+const { mutate: login } = useMutation({
+	mutationFn: (data: LoginSchema) => {
+		return AuthService.login(
+			data.email,
+			data.password,
+			data.name,
+			USER_ROLE.USER
+		)
+	},
+	onSuccess: () => {
+		toast.add({
+			title: 'Успех',
+			description: 'Логин успешно выполнен.',
+			color: 'success'
+		})
+		router.push(ROUTES.allQuizzes)
+	},
+	onError: err => {
+		toast.add({
+			title: 'Ошибка',
+			description: err.message,
+			color: 'error'
+		})
+	}
+})
 async function onSubmit(event: FormSubmitEvent<LoginSchema>) {
-	toast.add({
-		title: 'Success',
-		description: 'The form has been submitted.',
-		color: 'success',
-	})
-	console.log(event.data)
+	login(event.data)
 }
 
 const canSendData = computed(() => {
-	return state.email && state.password
+	return state.email && state.password && state.name
 })
 </script>
 
@@ -29,6 +56,9 @@ const canSendData = computed(() => {
 		class="space-y-4"
 		@submit="onSubmit"
 	>
+		<UFormField label="Имя" name="name">
+			<UInput class="w-full" v-model="state.name" />
+		</UFormField>
 		<UFormField
 			label="Электронная почта"
 			name="email"

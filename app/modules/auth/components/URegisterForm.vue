@@ -1,22 +1,48 @@
 <script setup lang="ts">
 import type { FormSubmitEvent } from '@nuxt/ui'
 import { registerSchema, type RegisterSchema } from '../schemas/register.schema'
+import { AuthService } from '../service/auth.service'
+import { USER_ROLE } from '~/shared/types/common.types'
+import { ROUTES } from '~/shared/config/routes'
 
 const state = reactive<Partial<RegisterSchema>>({
 	email: '',
 	password: '',
 	confirmPassword: '',
-	name: '',
+	name: ''
 })
 
 const toast = useToast()
+
+const router = useRouter()
+
+const { mutate: register } = useMutation({
+	mutationFn: (data: RegisterSchema) => {
+		return AuthService.register(
+			data.email,
+			data.password,
+			data.name,
+			USER_ROLE.USER
+		)
+	},
+	onSuccess: () => {
+		toast.add({
+			title: 'Успех',
+			description: 'Регистрация успешно выполнена.',
+			color: 'success'
+		})
+		router.push(ROUTES.allQuizzes)
+	},
+	onError: err => {
+		toast.add({
+			title: 'Ошибка',
+			description: err.message,
+			color: 'error'
+		})
+	}
+})
 async function onSubmit(event: FormSubmitEvent<RegisterSchema>) {
-	toast.add({
-		title: 'Success',
-		description: 'The form has been submitted.',
-		color: 'success',
-	})
-	console.log(event.data)
+	register(event.data)
 }
 
 const canSendData = computed(() => {

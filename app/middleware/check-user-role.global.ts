@@ -5,18 +5,17 @@ const adminRoutes = [
 	ROUTES.admin.quizzes,
 	ROUTES.admin.users,
 	ROUTES.admin.addAdmin,
-	ROUTES.admin.createQuiz,
+	ROUTES.admin.createQuiz
 ]
 
 export default defineNuxtRouteMiddleware((to, from) => {
-	const store = useUserStore()
-	const { isAdmin } = store
+	const store = useAuthStore()
 
-	if (isAdmin && to.path === ROUTES.home) return navigateTo(ROUTES.home)
+	if (store.isAdmin && to.path === ROUTES.home) return navigateTo(ROUTES.home)
 
-	if (!isAdmin && adminRoutes.includes(to.path))
+	if (!store.isAdmin && adminRoutes.includes(to.path))
 		return navigateTo(ROUTES.noAccess)
 
-	if (isAdmin && !adminRoutes.includes(to.path))
+	if (store.isAdmin && !adminRoutes.includes(to.path))
 		return navigateTo(ROUTES.admin.index)
 })

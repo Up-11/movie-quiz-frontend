@@ -6,11 +6,12 @@ export const loginSchema = z.object(
 			.string()
 			.nonempty('Электронная почта обязательна')
 			.email('Неправильный email'),
+		name: z.string().nonempty('Имя обязательно'),
 
 		password: z
 			.string()
 			.nonempty('Пароль обязателен')
-			.min(4, 'Минимальная длина пароля 8 символов'),
+			.min(4, 'Минимальная длина пароля 8 символов')
 	},
 	{ required_error: 'Поле обязательно' }
 )

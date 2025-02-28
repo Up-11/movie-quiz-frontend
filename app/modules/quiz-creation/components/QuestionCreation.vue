@@ -52,6 +52,7 @@ const { handleFileChange } = useFileUploading()
 				placeholder="Загрузите изображение"
 			/>
 			<NuxtImg
+				v-if="question.imageUrl"
 				class="max-h-50 w-full flex-1 rounded-lg object-contain"
 				:src="question.imageUrl"
 				width="300"
