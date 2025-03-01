@@ -15,7 +15,7 @@ const toast = useToast()
 
 const router = useRouter()
 
-const { mutate: login } = useMutation({
+const { mutate: login, isLoading } = useMutation({
 	mutationFn: (data: LoginSchema) => {
 		return AuthService.login(
 			data.email,
@@ -75,6 +75,8 @@ const canSendData = computed(() => {
 			<UInput class="w-full" v-model="state.password" type="password" />
 		</UFormField>
 
-		<UButton :disabled="!canSendData" type="submit"> Войти </UButton>
+		<UButton :disabled="!canSendData" :loading="isLoading" type="submit">
+			Войти
+		</UButton>
 	</UForm>
 </template>

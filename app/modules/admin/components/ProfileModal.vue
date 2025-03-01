@@ -5,26 +5,8 @@ import {
 	type EditAdminProfileSchema
 } from '../schemas/edit-admin-profile.schema'
 
-const store = useAuthStore()
-
-const { user } = store
-
-const state = reactive<Partial<EditAdminProfileSchema>>({
-	email: user.email || '',
-	password: '',
-	name: user.name || ''
-})
-
-const toast = useToast()
-async function onSubmit(event: FormSubmitEvent<EditAdminProfileSchema>) {
-	if (state.email === user.email && state.name === user.name) return
-	toast.add({
-		title: 'Success',
-		description: 'The form has been submitted.',
-		color: 'success'
-	})
-	console.log(event.data)
-}
+const { state, onSubmit, btnDisabled, deleteAccount, isLoading } =
+	useUserProfileForm()
 </script>
 
 <template>
@@ -57,7 +39,20 @@ async function onSubmit(event: FormSubmitEvent<EditAdminProfileSchema>) {
 					/>
 				</UFormField>
 
-				<UButton type="submit"> Обновить </UButton>
+				<div class="flex justify-between">
+					<UButton :disabled="btnDisabled" :loading="isLoading" type="submit">
+						Обновить
+					</UButton>
+					<QuitModal
+						@account-logout="deleteAccount"
+						title="Удалить аккаунт?"
+						button-text="Удалить"
+					>
+						<template #trigger>
+							<UButton> Удалить аккаунт </UButton>
+						</template>
+					</QuitModal>
+				</div>
 			</UForm>
 		</template>
 	</UModal>

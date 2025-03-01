@@ -16,7 +16,7 @@ const toast = useToast()
 
 const router = useRouter()
 
-const { mutate: register } = useMutation({
+const { mutate: register, isLoading } = useMutation({
 	mutationFn: (data: RegisterSchema) => {
 		return AuthService.register(
 			data.email,
@@ -86,7 +86,7 @@ const canSendData = computed(() => {
 			<UInput class="w-full" v-model="state.confirmPassword" type="password" />
 		</UFormField>
 
-		<UButton :disabled="!canSendData" type="submit">
+		<UButton :disabled="!canSendData" :loading="isLoading" type="submit">
 			Зарегистрироваться
 		</UButton>
 	</UForm>

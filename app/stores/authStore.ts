@@ -48,6 +48,11 @@ export const useAuthStore = defineStore('auth', () => {
 		}
 	}
 
+	const mutateAuthData = (newUserData: IUser) => {
+		user.value = newUserData
+		localStorage.setItem('user', JSON.stringify(newUserData))
+	}
+
 	const handleLogout = () => {
 		AuthService.logout()
 		setAuthData(initialUser, '')
@@ -61,6 +66,7 @@ export const useAuthStore = defineStore('auth', () => {
 		handleLogout,
 		initializeAuth,
 		isAuth,
-		isAdmin
+		isAdmin,
+		mutateAuthData
 	}
 })

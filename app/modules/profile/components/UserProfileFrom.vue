@@ -2,7 +2,16 @@
 import { useUserProfileForm } from '../composables/useUserProfileForm'
 import { editProfileSchema } from '../schemas/edit-profile.schema'
 
-const { state, onSubmit, user, handleLogout } = useUserProfileForm()
+const {
+	state,
+	onSubmit,
+	store,
+	handleLogout,
+	deleteAccount,
+	btnDisabled,
+	isModalOpen,
+	isLoading
+} = useUserProfileForm()
 </script>
 
 <template>
@@ -11,19 +20,21 @@ const { state, onSubmit, user, handleLogout } = useUserProfileForm()
 			<h2 class="md:text-lg">Имя</h2>
 			<USeparator />
 			<h2 class="text-sm font-bold md:text-lg">
-				{{ user.name }}
+				{{ store.user.name }}
 			</h2>
 		</div>
 		<div class="flex flex-col items-center gap-1">
 			<h2 class="md:text-lg">Email</h2>
 			<USeparator />
 			<h2 class="text-sm font-bold md:text-lg">
-				{{ user.email }}
+				{{ store.user.email }}
 			</h2>
 		</div>
 	</div>
-	<UModal title="Редактирование профиля">
-		<UButton size="sm" variant="soft"> Изменить профиль </UButton>
+	<UModal v-model:open="isModalOpen" title="Редактирование профиля">
+		<UButton @click="isModalOpen = true" size="sm" variant="soft">
+			Изменить профиль
+		</UButton>
 		<template #body>
 			<UForm
 				:schema="editProfileSchema"
@@ -49,13 +60,29 @@ const { state, onSubmit, user, handleLogout } = useUserProfileForm()
 						type="password"
 					/>
 				</UFormField>
-
-				<UButton type="submit"> Обновить </UButton>
+				<div class="flex justify-between">
+					<UButton :isLoading="isLoading" :disabled="btnDisabled" type="submit">
+						Обновить
+					</UButton>
+					<QuitModal
+						@account-logout="deleteAccount"
+						title="Удалить аккаунт?"
+						button-text="Удалить"
+					>
+						<template #trigger>
+							<UButton> Удалить аккаунт </UButton>
+						</template>
+					</QuitModal>
+				</div>
 			</UForm>
 		</template>
 	</UModal>
 	<div class="flex flex-col gap-3">
-		<UButton @click="handleLogout" size="sm" variant="soft"> Выйти </UButton>
+		<QuitModal @account-logout="handleLogout">
+			<template #trigger>
+				<UButton size="sm" variant="soft"> Выйти </UButton>
+			</template>
+		</QuitModal>
 	</div>
 </template>
 

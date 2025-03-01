@@ -8,7 +8,6 @@ FRONT
 [x]  - admin
 [x]  - rating from quiz page
 [x]  - clearCache 
-[-]  - saveCache 
 [x]  - think about usersAnswers 
 [x] - stat 
    [x] - completed questions 
@@ -20,4 +19,7 @@ FRONT
 [] - add new button
 [] - deleteSelfAcc
 [] - searchToAdmin
+[] - same profileEditing for admin
+[]  - saveCache 
+
    
