@@ -33,8 +33,6 @@ export const useAuthStore = defineStore('auth', () => {
 		isLoading.value = false
 	}
 
-	initializeAuth()
-
 	const setAuthData = (newUser: IUser | null, token: string) => {
 		user.value = newUser === null ? initialUser : newUser
 		accessToken.value = token

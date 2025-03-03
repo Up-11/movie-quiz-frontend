@@ -80,7 +80,6 @@ watchDebounced(
 				</UInput>
 			</UButtonGroup>
 		</div>
-
 		<div class="flex w-full flex-col gap-2 self-center lg:max-w-[95%]">
 			<USkeleton
 				v-if="isLoading && !isSearching"
@@ -99,6 +98,9 @@ watchDebounced(
 					<UButton @click="mutate(user.id)" variant="soft">Удалить</UButton>
 				</template>
 			</AdminCard>
+		</div>
+		<div v-if="!isLoading && users.length === 0" class="flex justify-center">
+			<h1 class="text-bold p-4 text-2xl">Игроков нет</h1>
 		</div>
 	</section>
 </template>

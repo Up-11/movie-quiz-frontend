@@ -6,7 +6,7 @@ defineProps<{ component: Component; quizes: QuizCard[] }>()
 
 <template>
 	<div
-		class="grid justify-items-center 2xl:grid-cols-6 xl:grid-cols-4 justify-center md:grid-cols-3 sm:grid-cols-2 xs:grid-cols-1 gap-7"
+		class="xs:grid-cols-1 grid justify-center justify-items-center gap-7 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6"
 	>
 		<component
 			:is="component"

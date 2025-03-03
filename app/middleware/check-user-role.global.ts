@@ -10,6 +10,7 @@ const adminRoutes = [
 
 export default defineNuxtRouteMiddleware((to, from) => {
 	const store = useAuthStore()
+	if (store.isLoading) return
 
 	if (store.isAdmin && to.path === ROUTES.home) return navigateTo(ROUTES.home)
 

@@ -1,4 +1,9 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const slots = defineSlots<{
+	items: () => void
+	actions: () => void
+}>()
+</script>
 
 <template>
 	<article class="rounded-lg bg-black/90 p-4 backdrop-blur-2xl">
@@ -14,7 +19,12 @@
 					sideOffset: 8
 				}"
 			>
-				<UButton color="primary" variant="ghost" icon="i-lucide-menu" />
+				<UButton
+					v-if="!!slots.actions"
+					color="primary"
+					variant="ghost"
+					icon="i-lucide-menu"
+				/>
 				<template #content>
 					<div class="flex w-36 flex-col gap-1">
 						<slot name="actions" />

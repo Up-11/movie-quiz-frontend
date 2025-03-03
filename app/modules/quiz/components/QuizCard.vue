@@ -1,11 +1,11 @@
 <script lang="ts" setup>
 import { ref, onMounted } from 'vue'
-import type { QuizCard } from '../types'
 import VanillaTilt from 'vanilla-tilt'
 import { ROUTES } from '~/shared/config/routes'
+import type { IQuizDto } from '../types'
 
 defineProps<{
-	card: QuizCard
+	card: IQuizDto
 }>()
 
 const cardRef = ref<HTMLElement | null>(null)
@@ -29,25 +29,29 @@ onMounted(() => {
 			class="relative flex h-full max-w-[350px] cursor-pointer flex-col rounded-lg border-2 border-zinc-300 bg-black/50 shadow-2xl backdrop-blur-2xl transition-all hover:border-violet-400 hover:shadow-violet-600"
 			ref="cardRef"
 		>
-			<UBadge
+			<!-- <UBadge
 				v-if="card.completed"
 				color="success"
 				class="absolute -top-3 -right-5"
 				>Пройдено</UBadge
-			>
+			> -->
 
 			<NuxtImg
 				class="aspect-auto rounded-tl-lg rounded-tr-lg object-fill"
 				width="100%"
-				loading="lazy"
 				height="auto"
 				:src="card.imageUrl"
 				:alt="card.name"
+				:placeholder="'blur'"
+				:loading="'lazy'"
+				:img-style="{ objectFit: 'cover' }"
 			/>
 			<div class="flex h-full flex-col justify-between gap-2 p-4">
 				<div class="flex items-center justify-between gap-2">
 					<h1 class="font-bold">{{ card.name }}</h1>
-					<h1 class="text-sm font-bold text-violet-200">{{ card.film }}</h1>
+					<h1 class="text-sm font-bold text-violet-200">
+						{{ card.film.title }}
+					</h1>
 				</div>
 				<p class="line-clamp-4">
 					{{ card.description }}
@@ -60,13 +64,15 @@ onMounted(() => {
 					<UTooltip text="Людей прошло">
 						<div class="flex items-center">
 							<Icon name="uil:users-alt" size="20" />
-							<span class="text-sm font-bold">{{ card.usersCompletions }}</span>
+							<span class="text-sm font-bold">{{
+								card._count.completions
+							}}</span>
 						</div>
 					</UTooltip>
 					<UTooltip text="Вопросов">
 						<div class="flex items-center">
 							<Icon name="uil:shield-question" size="20" />
-							<span class="text-sm font-bold">{{ card.questionsCount }}</span>
+							<span class="text-sm font-bold">{{ card._count.questions }}</span>
 						</div>
 					</UTooltip>
 				</div>

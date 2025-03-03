@@ -1,9 +1,17 @@
 <script lang="ts" setup>
+import { defineProps, defineEmits, computed, defineModel } from 'vue'
 import type { AnswerVariant } from '~/modules/quiz/types'
 
-const props = defineProps<{ variant: AnswerVariant; isCorrect: boolean }>()
+const model = defineModel<string>('variant-text')
 
-const emits = defineEmits(['set-correct-variant'])
+const props = defineProps<{
+	variant: AnswerVariant
+	isCorrect: boolean
+}>()
+
+const emits = defineEmits<{
+	(e: 'set-correct-variant', value: AnswerVariant): void
+}>()
 
 const onClickSetCorrectVariant = () => {
 	emits('set-correct-variant', props.variant)
@@ -26,9 +34,7 @@ const btnIconColor = computed(() => (props.isCorrect ? 'success' : 'neutral'))
 			variant="soft"
 			type="text"
 			placeholder="Введите вариант ответа"
-			:model-value="variant.variant"
+			v-model="model"
 		/>
 	</div>
 </template>
-
-<style scoped></style>

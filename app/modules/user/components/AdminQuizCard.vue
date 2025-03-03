@@ -1,18 +1,11 @@
 <script setup lang="ts">
-import type { QuizCard } from '~/modules/quiz/types'
+import type { IQuizDto, QuizCard } from '~/modules/quiz/types'
 
-defineProps<{
-	quiz: Pick<
-		QuizCard,
-		| 'id'
-		| 'imageUrl'
-		| 'questionsCount'
-		| 'name'
-		| 'rating'
-		| 'film'
-		| 'usersCompletions'
-	>
+const props = defineProps<{
+	quiz: IQuizDto
 }>()
+
+const rating = computed(() => (props.quiz.rating ? props.quiz.rating : 0))
 </script>
 
 <template>
@@ -26,13 +19,13 @@ defineProps<{
 				class="mb-2 flex w-full items-center justify-center gap-5 sm:mb-0 sm:w-1/3"
 			>
 				<UTooltip text="Рейтинг">
-					<URating :number="quiz.rating" />
+					<URating :number="rating" />
 				</UTooltip>
 				<UTooltip text="Людей прошло">
 					<div class="flex items-center">
 						<Icon name="uil:users-alt" size="20" />
 						<span class="ml-1 cursor-default text-sm font-bold text-white">
-							{{ quiz.usersCompletions }}
+							{{ quiz._count.completions }}
 						</span>
 					</div>
 				</UTooltip>
@@ -40,13 +33,13 @@ defineProps<{
 					<div class="flex items-center">
 						<Icon name="uil:shield-question" size="20" />
 						<span class="ml-1 cursor-default text-sm font-bold text-white">
-							{{ quiz.questionsCount }}
+							{{ quiz._count.questions }}
 						</span>
 					</div>
 				</UTooltip>
 			</div>
 			<p class="w-full text-center sm:w-1/3 sm:text-right">
-				{{ quiz.film }}
+				{{ quiz.film.title }}
 			</p>
 		</div>
 	</div>

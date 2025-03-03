@@ -3,3 +3,8 @@ export interface IUserDto {
 	name: string
 	email: string
 }
+export interface IFilmDto {
+	id: string
+	title: string
+	label: string
+}

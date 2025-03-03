@@ -51,3 +51,18 @@ export interface ICurrentQuiz {
 	correctVariant: AnswerVariant | null
 	isFinished: boolean
 }
+
+export interface IQuizDto {
+	id: string
+	name: string
+	description: string
+	imageUrl: string
+	film: {
+		title: string
+	}
+	_count: {
+		questions: number
+		completions: number
+	}
+	rating: number
+}

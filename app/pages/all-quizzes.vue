@@ -1,9 +1,9 @@
-<script setup>
+<script setup lang="ts">
 import QuizCard from '~/modules/quiz/components/QuizCard.vue'
-import { quizCards } from '~/modules/quiz/mock'
-
+import { quizService } from '~/modules/quiz/service/quiz.service'
+import type { IQuizDto } from '~/modules/quiz/types'
 definePageMeta({
-	layout: 'root',
+	layout: 'root'
 })
 useHead({
 	title: 'Фильмонафт – Все викторины',
@@ -13,12 +13,12 @@ useHead({
 		{
 			name: 'description',
 			content:
-				'Выбери квиз по любимому жанру или фильму! Огромная коллекция викторин по культовым кинолентам.',
+				'Выбери квиз по любимому жанру или фильму! Огромная коллекция викторин по культовым кинолентам.'
 		},
 		{
 			name: 'keywords',
 			content:
-				'викторина, фильмы, кино, тесты, угадай фильм, киноигра, квизы, киновикторина',
+				'викторина, фильмы, кино, тесты, угадай фильм, киноигра, квизы, киновикторина'
 		},
 		{ name: 'author', content: 'MovieQuiz Team' },
 
@@ -26,11 +26,11 @@ useHead({
 		{
 			property: 'og:description',
 			content:
-				'Проверь свои знания о кино! Выбери квиз по любимому фильму или жанру и пройди увлекательный тест.',
+				'Проверь свои знания о кино! Выбери квиз по любимому фильму или жанру и пройди увлекательный тест.'
 		},
 		{
 			property: 'og:image',
-			content: 'https://yourwebsite.com/all-quizzes.jpg',
+			content: 'https://yourwebsite.com/all-quizzes.jpg'
 		},
 		{ property: 'og:url', content: 'https://yourwebsite.com/quizzes' },
 		{ property: 'og:type', content: 'website' },
@@ -40,26 +40,36 @@ useHead({
 		{
 			name: 'twitter:description',
 			content:
-				'Выбери викторину по любимому фильму или жанру и проверь свои знания!',
+				'Выбери викторину по любимому фильму или жанру и проверь свои знания!'
 		},
 		{
 			name: 'twitter:image',
-			content: 'https://yourwebsite.com/all-quizzes.jpg',
-		},
+			content: 'https://yourwebsite.com/all-quizzes.jpg'
+		}
 	],
-	link: [{ rel: 'icon', href: '/favicon.ico', type: 'image/x-icon' }],
+	link: [{ rel: 'icon', href: '/favicon.ico', type: 'image/x-icon' }]
+})
+
+const items = ref<IQuizDto[]>([])
+
+useQuery({
+	queryFn: () => quizService.getAllQuizzes(),
+	onSuccess: res => {
+		items.value = res.data
+	},
+	enabled: true
 })
 </script>
 <template>
-  <section class="flex mt-5 flex-col gap-3">
-    <VTitle :title="'Все Викторины '" />
-    <div>
-      <QuzzCardList
-        :component="QuizCard"
-        :quizes="quizCards"
-      />
-    </div>
-  </section>
+	<section class="mt-5 flex flex-col gap-3">
+		<VTitle title="Все Викторины" />
+
+		<div
+			class="xs:grid-cols-1 grid justify-center justify-items-center gap-7 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6"
+		>
+			<QuizCard v-for="card in items" :key="card.id" :card="card" />
+		</div>
+	</section>
 </template>
 
 <style scoped></style>

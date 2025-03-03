@@ -9,5 +9,6 @@ onMounted(() => {
 </script>
 
 <template>
-	<slot />
+	<slot v-if="!authStore.isLoading" />
+	<div v-else>LOADING</div>
 </template>

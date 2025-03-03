@@ -1,9 +1,9 @@
 <script lang="ts" setup>
-import type { Question } from '~/modules/quiz/types'
 import { useQuizCreationStore } from '../store/QuizCreationStore'
 import { useFileUploading } from '../composables/useFileUploading'
+import type { IQuestion } from '../types'
 
-const props = defineProps<{ question: Question }>()
+const props = defineProps<{ question: IQuestion }>()
 
 const store = useQuizCreationStore()
 
@@ -21,9 +21,10 @@ const { handleFileChange } = useFileUploading()
 				v-model="question.question"
 			/>
 			<VariantCreation
-				v-for="variant in question.variants"
-				:is-correct="question.correctVariant.id === variant.id"
+				v-for="variant in question.answers"
+				:is-correct="question.correctAnswerId === variant.id"
 				:key="variant.id"
+				v-model:variant-text="variant.variant"
 				:variant="variant"
 				@set-correct-variant="store.setCorrectVariant(variant, question)"
 			/>

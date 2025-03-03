@@ -5,15 +5,14 @@ import {
 	type IAuthData
 } from './auth.helpers'
 import { apiConfig } from '~/shared/config/api-config'
-import type { USER_ROLE } from '~/shared/types/common.types'
+import { USER_ROLE } from '~/shared/types/common.types'
 
 export const AuthService = {
-	async login(email: string, password: string, name: string, role: USER_ROLE) {
+	async login(email: string, name: string, password: string) {
 		const response = await publicApi.post<IAuthData>(apiConfig.auth.login, {
 			email,
 			password,
-			name,
-			role
+			name
 		})
 		if (response.data.accessToken) saveToStorage(response.data)
 
@@ -22,15 +21,15 @@ export const AuthService = {
 
 	async register(
 		email: string,
-		password: string,
 		name: string,
+		password: string,
 		role: USER_ROLE
 	) {
 		const response = await publicApi.post<IAuthData>(apiConfig.auth.register, {
 			email,
-			password,
+			role,
 			name,
-			role
+			password
 		})
 		if (response.data.accessToken) saveToStorage(response.data)
 		return response.data
@@ -39,5 +38,14 @@ export const AuthService = {
 	logout() {
 		removeTokenFromStorage()
 		localStorage.removeItem('user')
+	},
+
+	async addNewAdmin(email: string, name: string, password: string) {
+		return await publicApi.post(apiConfig.auth.createAdmin, {
+			email,
+			name,
+			password,
+			role: USER_ROLE.ADMIN
+		})
 	}
 }

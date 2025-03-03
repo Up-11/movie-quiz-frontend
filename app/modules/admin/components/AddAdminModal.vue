@@ -2,22 +2,45 @@
 import type { FormSubmitEvent } from '@nuxt/ui'
 import {
 	registerAdminSchema,
-	type RegisterAdminSchema,
+	type RegisterAdminSchema
 } from '../schemas/register-admin.schema'
+import { AuthService } from '~/modules/auth/service/auth.service'
+
+const toast = useToast()
+
+const emit = defineEmits(['refetch-admins'])
+
+const isOpen = ref<boolean>(false)
 
 const state = reactive<Partial<RegisterAdminSchema>>({
 	email: '',
 	password: '',
-	name: '',
+	name: ''
 })
 
-const toast = useToast()
+const { mutate } = useMutation({
+	mutationFn: (data: RegisterAdminSchema) =>
+		AuthService.addNewAdmin(data.email, data.name, data.password),
+	onSuccess: () => {
+		toast.add({
+			title: 'Успех',
+			description: 'Новый аккаунт администратора создан.',
+			color: 'success'
+		})
+		isOpen.value = false
+		emit('refetch-admins')
+	},
+	onError: err => {
+		toast.add({
+			title: 'Ошибка',
+			description: err.message,
+			color: 'error'
+		})
+	}
+})
+
 async function onSubmit(event: FormSubmitEvent<RegisterAdminSchema>) {
-	toast.add({
-		title: 'Success',
-		description: 'The form has been submitted.',
-		color: 'success',
-	})
+	mutate(event.data)
 	console.log(event.data)
 }
 
@@ -27,8 +50,10 @@ const canSendData = computed(() => {
 </script>
 
 <template>
-	<UModal title="Добавить администратора">
-		<slot name="trigger" />
+	<UModal v-model:open="isOpen" title="Добавить администратора">
+		<div @click="isOpen = true">
+			<slot name="trigger" />
+		</div>
 
 		<template #body>
 			<UForm

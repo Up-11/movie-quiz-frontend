@@ -6,7 +6,7 @@ definePageMeta({
 </script>
 
 <template>
-	<section class="flex h-screen flex-col gap-5 p-4">
+	<section class="flex flex-col gap-5 p-4">
 		<header class="flex justify-between p-4">
 			<h1 class="text-bold text-2xl">Создать новую викторину</h1>
 		</header>

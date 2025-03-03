@@ -36,7 +36,7 @@ watchDebounced(
 	<section class="flex flex-col gap-5 p-4">
 		<header class="flex justify-between p-4">
 			<h1 class="text-bold text-2xl">Администраторы</h1>
-			<AddAdminModal>
+			<AddAdminModal @refetch-admins="fetch">
 				<template #trigger>
 					<UButton variant="soft" icon="uil:plus"> Добавить </UButton>
 				</template>
@@ -62,6 +62,9 @@ watchDebounced(
 					<AdminUserCard :user="admin" />
 				</template>
 			</AdminCard>
+		</div>
+		<div v-if="!isLoading && admins.length === 0" class="flex justify-center">
+			<h1 class="text-bold p-4 text-2xl">Администраторов нет</h1>
 		</div>
 	</section>
 </template>

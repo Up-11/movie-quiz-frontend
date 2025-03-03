@@ -1,6 +1,6 @@
 import { privateApi } from '~/shared/api/interceptors'
 import type { USER_ROLE } from '~/shared/types/common.types'
-import type { IUserDto } from './admin.service.dto'
+import type { IFilmDto, IUserDto } from './admin.service.dto'
 import { apiConfig } from '~/shared/config/api-config'
 
 export const AdminService = {
@@ -11,5 +11,14 @@ export const AdminService = {
 	},
 	async deleteUserById(id: string) {
 		return await privateApi.delete(apiConfig.users.deleteUserById(id))
+	},
+	async getFilms() {
+		return await privateApi.get<IFilmDto[]>(apiConfig.films.getAllFilms)
+	},
+	async createFilm(title: string) {
+		return await privateApi.post(apiConfig.films.addFilm, { title })
+	},
+	async deleteFilm(title: string) {
+		return await privateApi.delete(apiConfig.films.deleteFilm(title))
 	}
 }

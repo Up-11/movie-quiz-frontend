@@ -17,12 +17,7 @@ const router = useRouter()
 
 const { mutate: login, isLoading } = useMutation({
 	mutationFn: (data: LoginSchema) => {
-		return AuthService.login(
-			data.email,
-			data.password,
-			data.name,
-			USER_ROLE.USER
-		)
+		return AuthService.login(data.email, data.name, data.password)
 	},
 	onSuccess: () => {
 		toast.add({

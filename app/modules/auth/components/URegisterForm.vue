@@ -20,8 +20,8 @@ const { mutate: register, isLoading } = useMutation({
 	mutationFn: (data: RegisterSchema) => {
 		return AuthService.register(
 			data.email,
-			data.password,
 			data.name,
+			data.password,
 			USER_ROLE.USER
 		)
 	},

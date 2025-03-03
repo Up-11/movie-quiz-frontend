@@ -18,7 +18,7 @@ withDefaults(
 
 const handleAdminLogout = () => {
 	emit('account-logout')
-	router.replace(ROUTES.allQuizzes)
+	router.push(ROUTES.allQuizzes)
 }
 </script>
 
