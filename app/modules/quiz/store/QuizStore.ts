@@ -14,7 +14,8 @@ const InitialCurrentQuiz: ICurrentQuiz = {
 	questionsCount: 0,
 	currentIndex: 0,
 	correctVariant: null,
-	isFinished: false
+	isFinished: false,
+	beforeCompleted: undefined
 }
 
 export const useQuizStore = defineStore('QuizStore', () => {
@@ -138,6 +139,7 @@ export const useQuizStore = defineStore('QuizStore', () => {
 		currentQuiz.name = quiz.name
 		currentQuiz.questionsCount = quiz.questions.length
 		currentQuiz.currentIndex = 0
+		currentQuiz.beforeCompleted = quiz.completed
 	}
 
 	const clearIsStarted = () => {

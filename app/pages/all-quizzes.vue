@@ -54,6 +54,8 @@ const items = ref<IQuizDto[]>([])
 
 const authStore = useAuthStore()
 
+const isLoading = ref<boolean>(true)
+
 watch(
 	() => authStore.isAuth,
 	() => (authStore.isAuth ? fetchAuthorized() : fetchUnauthorized())
@@ -67,6 +69,7 @@ const { fetch: fetchAuthorized } = useQuery({
 	queryFn: () => quizService.getAllAuth(),
 	onSuccess: res => {
 		items.value = res.data
+		isLoading.value = false
 	}
 })
 
@@ -74,6 +77,7 @@ const { fetch: fetchUnauthorized } = useQuery({
 	queryFn: () => quizService.getAllQuizzes(),
 	onSuccess: res => {
 		items.value = res.data
+		isLoading.value = false
 	}
 })
 </script>
@@ -84,7 +88,13 @@ const { fetch: fetchUnauthorized } = useQuery({
 		<div
 			class="xs:grid-cols-1 grid justify-center justify-items-center gap-7 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6"
 		>
-			<QuizCard v-for="card in items" :key="card.id" :card="card" />
+			<QuizCard
+				v-if="!isLoading"
+				v-for="card in items"
+				:key="card.id"
+				:card="card"
+			/>
+			<USkeleton v-for="_ in 6" v-else class="h-74 w-full rounded-md" />
 		</div>
 	</section>
 </template>

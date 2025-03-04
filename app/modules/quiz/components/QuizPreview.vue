@@ -11,7 +11,7 @@ const { startCompletion } = useQuizCompletion()
 	<div class="container mx-auto px-4 py-6">
 		<div class="grid grid-cols-1 gap-6 md:grid-cols-2">
 			<NuxtImg
-				:src="quiz.imageUrl"
+				:src="formatUrl(quiz.imageUrl)"
 				:alt="quiz.name"
 				class="h-64 w-full rounded-md object-cover md:h-auto"
 				width="600"
@@ -21,7 +21,9 @@ const { startCompletion } = useQuizCompletion()
 				<div>
 					<div class="flex flex-wrap items-center justify-between">
 						<h1 class="text-2xl font-bold md:text-3xl">{{ quiz.name }}</h1>
-						<h2 class="text-lg font-semibold md:text-2xl">{{ quiz.film }}</h2>
+						<h2 class="text-lg font-semibold md:text-2xl">
+							{{ quiz.film.title }}
+						</h2>
 					</div>
 					<p class="mt-2 text-sm text-gray-200 md:text-lg">
 						{{ quiz.description }}
@@ -31,13 +33,13 @@ const { startCompletion } = useQuizCompletion()
 				<div class="flex flex-wrap items-center gap-2">
 					<UBadge variant="soft" class="cursor-default text-xs md:text-sm">
 						Людей прошли:
-						<span class="font-bold">{{ quiz.usersCompletions }}</span>
+						<span class="font-bold">{{ quiz._count.completions }}</span>
 					</UBadge>
 					<UBadge variant="soft" class="cursor-default text-xs md:text-sm">
 						Рейтинг: <span class="font-bold">{{ quiz.rating }}</span>
 					</UBadge>
 					<UBadge variant="soft" class="cursor-default text-xs md:text-sm">
-						Вопросов: <span class="font-bold">{{ quiz.questionsCount }}</span>
+						Вопросов: <span class="font-bold">{{ quiz._count.questions }}</span>
 					</UBadge>
 
 					<USeparator

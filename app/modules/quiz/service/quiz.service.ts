@@ -1,6 +1,6 @@
 import { privateApi, publicApi } from '~/shared/api/interceptors'
 import { apiConfig } from '~/shared/config/api-config'
-import type { IQuizDto, IUserCompletion, SearchType } from '../types'
+import type { IQuizDto, IUserCompletion, QuizCard, SearchType } from '../types'
 import type { Quiz } from '~/modules/quiz-creation/types'
 
 export const quizService = {
@@ -30,9 +30,32 @@ export const quizService = {
 			quizId: string
 		}>(apiConfig.quizzes.rateQuiz(id), { rating })
 	},
-	async searchQuizzes(searchTerm?: string, searchBy?: SearchType) {
-		return await publicApi.get<IQuizDto[]>(apiConfig.quizzes.searchQuizzes, {
-			params: { ...(searchTerm && { searchTerm }), searchBy }
+	async getQuizById(id: string, userId?: string | null) {
+		return await publicApi.get<QuizCard>(apiConfig.quizzes.getQuizById(id), {
+			params: { ...(userId !== null && { userId }) }
+		})
+	},
+	async completeQuizUnAuth(
+		quizId: string,
+		correctAnswers: number,
+		failedAnswers: number
+	) {
+		return await publicApi.post(apiConfig.quizzes.completeQuiz, {
+			correctAnswers,
+			failedAnswers,
+			quizId
+		})
+	},
+
+	async completeQuizAuth(
+		quizId: string,
+		correctAnswers: number,
+		failedAnswers: number
+	) {
+		return await privateApi.post(apiConfig.quizzes.completeQuizAuth, {
+			correctAnswers,
+			failedAnswers,
+			quizId
 		})
 	}
 }

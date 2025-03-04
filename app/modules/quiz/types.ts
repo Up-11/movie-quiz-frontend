@@ -4,27 +4,33 @@ export type QuizCard = {
 	imageUrl: string
 	description: string
 	rating: number
-	usersCompletions: number
-	questionsCount: number
-	film: string
-	completed?: boolean
-	userRating?: number
+	film: {
+		title: string
+	}
 	questions: Question[]
+	completed?: boolean
+	_count: {
+		completions: number
+		questions: number
+	}
+	userRating: string
 }
 
 export type AnswerVariant = {
 	id: string
 	variant: string
 	letter?: string
+	questionId: string
 }
 
 export type Question = {
 	id: string
 	imageUrl: string
 	description: string
+	quizId: string
 	question: string
-	variants: AnswerVariant[]
-	correctVariant: AnswerVariant
+	answers: AnswerVariant[]
+	correctAnswer: AnswerVariant
 }
 export interface CachedQuiz {
 	id: string
@@ -50,6 +56,7 @@ export interface ICurrentQuiz {
 	currentIndex: number
 	correctVariant: AnswerVariant | null
 	isFinished: boolean
+	beforeCompleted?: boolean
 }
 
 export interface IQuizDto {

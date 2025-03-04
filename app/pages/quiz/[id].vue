@@ -2,6 +2,9 @@
 import RestartModal from '~/modules/quiz/components/RestartModal.vue'
 import { quizCards } from '~/modules/quiz/mock'
 import { ROUTES } from '~/shared/config/routes'
+import { useQuery } from '../../shared/composables/useQuery'
+import { quizService } from '~/modules/quiz/service/quiz.service'
+import type { QuizCard } from '~/modules/quiz/types'
 
 definePageMeta({
 	layout: 'completion'
@@ -9,16 +12,28 @@ definePageMeta({
 const route = useRoute()
 const router = useRouter()
 
-const currentQuiz = computed(() =>
-	quizCards.find(quiz => quiz.id === (route.params.id as string))
+const authStore = useAuthStore()
+
+const currentQuiz = ref<QuizCard>()
+
+const { isLoading, fetch } = useQuery({
+	queryFn: () =>
+		quizService.getQuizById(route.params.id as string, authStore.user.id),
+	onSuccess: res => {
+		currentQuiz.value = res.data
+	},
+	onError: () => {
+		router.replace(ROUTES.allQuizzes)
+	},
+	enabled: true
+})
+
+const pageTitle = computed(
+	() => `Викторина ${currentQuiz.value?.name || 'Неизвестная викторина'}`
 )
 
-if (!currentQuiz.value) {
-	router.replace(ROUTES.allQuizzes)
-}
-
 useHead({
-	title: `Викторина ${currentQuiz.value?.name || 'Неизвестная викторина'}`
+	title: pageTitle
 })
 
 const modal = useModal()
@@ -36,15 +51,20 @@ const {
 
 watch(
 	() => currQuiz.value?.currentIndex,
-	() => {
-		setCorrectVariant(
-			currentQuiz.value!.questions[currQuiz.value.currentIndex]!.correctVariant
-		)
+	newIndex => {
+		const currentQuestion = currentQuiz.value?.questions?.[newIndex]
+		if (currentQuestion) {
+			setCorrectVariant(currentQuestion.correctAnswer)
+		}
 	},
 	{ immediate: true }
 )
 
-onMounted(() => {
+onMounted(async () => {
+	await fetch()
+	setCorrectVariant(
+		currentQuiz.value!.questions[currQuiz.value.currentIndex]!.correctAnswer
+	)
 	if (!currentQuiz.value) return
 	updateCurrentQuiz(currentQuiz.value)
 	if (checkIsStarted(currQuiz.value)) {
@@ -60,7 +80,8 @@ onUnmounted(() => {
 </script>
 
 <template>
-	<div class="flex h-full justify-center">
+	<SkeletonPreview v-if="isLoading" />
+	<div v-else class="flex h-full justify-center">
 		<Transition v-if="currentQuiz && !isStarted" name="bounce" appear>
 			<QuizPreview v-if="currentQuiz && !isStarted" :quiz="currentQuiz" />
 		</Transition>

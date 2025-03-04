@@ -1,36 +1,18 @@
 <script setup lang="ts">
-import type { TabsItem } from '@nuxt/ui'
 import SmallQuizCard from '~/modules/quiz/components/SmallQuizCard.vue'
-import { quizCards } from '~/modules/quiz/mock'
 import { quizService } from '~/modules/quiz/service/quiz.service'
-import type { IQuizDto, SearchType } from '~/modules/quiz/types'
+import type { IQuizDto } from '~/modules/quiz/types'
 
 const value = ref<string>('')
 
 const isSearching = ref<boolean>(false)
 
-const searchBy = ref<SearchType>('name')
-
-const filteredByName = ref<IQuizDto[]>([])
-const filteredByFilm = computed(() => quizCards.slice(0, 3))
-
-const items = ref<TabsItem[]>([
-	{
-		label: 'По названию',
-		slot: 'byName',
-		icon: 'uil:text-fields'
-	},
-	{
-		label: 'По фильму',
-		icon: 'uil:video',
-		slot: 'byFilm'
-	}
-])
+const filteredQuizzes = ref<IQuizDto[]>([])
 
 const { isLoading, fetch } = useQuery({
-	queryFn: () => quizService.searchQuizzes(value.value, searchBy.value),
+	queryFn: () => quizService.getAllQuizzes(value.value),
 	onSuccess: res => {
-		filteredByName.value = res.data
+		filteredQuizzes.value = res.data
 	}
 })
 
@@ -77,6 +59,7 @@ const onClickStop = () => {
 						</template>
 					</UInput>
 					<UButton
+						:disabled="!value"
 						@click="onClickSearch"
 						color="neutral"
 						variant="soft"
@@ -88,46 +71,25 @@ const onClickStop = () => {
 				<div v-if="isSearching">
 					<h1 class="font-bold text-violet-300">Результаты</h1>
 					<div class="mt-2 flex w-full flex-col gap-3 border-zinc-300 p-2">
-						<UTabs
-							color="primary"
-							variant="link"
-							:items="items"
-							class="w-full gap-4"
-							:ui="{ trigger: 'flex-1' }"
-							:unmount-on-hide="false"
+						<div v-if="filteredQuizzes.length" class="flex flex-col gap-5">
+							<SmallQuizCard
+								:key="quiz.id"
+								:card="quiz"
+								v-for="quiz in filteredQuizzes"
+							/>
+						</div>
+						<div
+							v-else-if="!filteredQuizzes.length && !isLoading"
+							class="flex justify-center text-violet-200"
 						>
-							<template #byName>
-								<div v-if="filteredByName.length" class="flex flex-col gap-5">
-									<SmallQuizCard
-										:key="quiz.id"
-										:card="quiz"
-										v-for="quiz in filteredByName"
-									/>
-								</div>
-								<div v-else class="flex justify-center text-violet-200">
-									<p>Ничего не найдено :(</p>
-								</div>
-							</template>
-							<template #byFilm>
-								<div v-if="filteredByFilm.length" class="flex flex-col gap-5">
-									<SmallQuizCard
-										:key="quiz.id"
-										:card="quiz"
-										v-for="quiz in filteredByFilm"
-									/>
-								</div>
-								<div v-else class="flex justify-center text-violet-200">
-									<p>Ничего не найдено :(</p>
-								</div>
-							</template>
-						</UTabs>
+							<p>Ничего не найдено :(</p>
+						</div>
+						<div v-else-if="isLoading" class="mt-5 flex justify-center">
+							<ULoader />
+						</div>
 					</div>
 				</div>
-				<div v-else-if="isLoading" class="mt-5 flex justify-center">
-					<ULoader />
-				</div>
-
-				<h1 v-else class="font-bold text-violet-300">
+				<h1 v-else class="text-lg font-bold text-violet-300">
 					Введите название искомой викторины или фильма
 				</h1>
 			</section>

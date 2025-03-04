@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { ROUTES } from '~/shared/config/routes'
 import type { AnswerVariant, Question, QuizCard } from '../types'
+import { quizService } from '../service/quiz.service'
 
 interface IQuizFinalMenuProps {
 	quiz: QuizCard
@@ -8,6 +9,8 @@ interface IQuizFinalMenuProps {
 const props = defineProps<IQuizFinalMenuProps>()
 
 const isShowResult = ref(false)
+
+const authStore = useAuthStore()
 
 const btnText = computed(() =>
 	isShowResult.value ? 'Скрыть ответы' : 'Показать ответы'
@@ -33,11 +36,34 @@ const correctAnswersPercent = computed(
 		100
 )
 
+onMounted(() => {
+	if (!currentQuiz.value.beforeCompleted) {
+		authStore.isAuth ? fetchAuth() : fetchUnAuth()
+	}
+})
+
+const { fetch: fetchUnAuth } = useQuery({
+	queryFn: () =>
+		quizService.completeQuizUnAuth(
+			currentQuiz.value.id,
+			correctAnswers.value.length,
+			failedAnswers.value.length
+		)
+})
+
+const { fetch: fetchAuth } = useQuery({
+	queryFn: () =>
+		quizService.completeQuizAuth(
+			currentQuiz.value.id,
+			correctAnswers.value.length,
+			failedAnswers.value.length
+		)
+})
+
 const currentAnswer = (question: Question) => {
 	const answer = currentQuizAnswerList.value
 		.filter(curr => curr.quizId === props.quiz.id)
-		.map(curr => question.variants.find(q => q.id === curr.answer.id)?.variant)
-	console.log(answer)
+		.map(curr => question.answers.find(q => q.id === curr.answer.id)?.variant)
 	return answer.filter(ans => ans !== undefined).toString()
 }
 
@@ -45,15 +71,13 @@ onUnmounted(() => {
 	clearUserAnswers()
 	deleteCachedQuizByQuiz(currentQuiz.value)
 })
-
-//TODO Add a circle with a percent of correct answers
 </script>
 
 <template>
 	<div class="container mx-auto px-4 py-6 pb-12">
 		<div class="flex flex-wrap items-center justify-between">
 			<h1 class="text-2xl font-bold md:text-3xl">{{ quiz.name }}</h1>
-			<h2 class="text-lg font-semibold md:text-2xl">{{ quiz.film }}</h2>
+			<h2 class="text-lg font-semibold md:text-2xl">{{ quiz.film.title }}</h2>
 		</div>
 		<USeparator color="primary" />
 		<div class="mt-4 flex flex-col gap-6">
@@ -70,9 +94,7 @@ onUnmounted(() => {
 				</h1>
 			</div>
 			<div class="flex justify-center">
-				<h1 class="text-2xl font-bold text-violet-200">
-					{{ correctAnswersPercent }}%
-				</h1>
+				<CircleProgress :percent="correctAnswersPercent" />
 			</div>
 
 			<section class="flex flex-col items-center justify-center gap-3">
@@ -87,18 +109,18 @@ onUnmounted(() => {
 				>
 					<div
 						v-for="(question, index) in quiz.questions"
-						class="mx-auto flex min-h-80 w-full max-w-100 flex-col self-center rounded-xl bg-black/70 backdrop-blur-2xl"
+						class="mx-auto flex h-full min-h-90 w-full max-w-100 flex-col self-center rounded-xl bg-black/70 backdrop-blur-2xl"
 					>
 						<NuxtImg
-							:src="question.imageUrl"
-							class="h-[70%] w-full rounded-tl-lg rounded-tr-lg object-cover"
+							:src="formatUrl(question.imageUrl)"
+							class="h-1/2 w-full rounded-tl-lg rounded-tr-lg object-cover"
 						/>
-						<div class="flex h-full flex-col justify-between gap-4 p-4">
+						<div class="flex h-1/2 flex-col justify-between gap-4 p-4">
 							<h1>Вопрос #{{ index + 1 }}: {{ question.question }}</h1>
 							<USeparator color="neutral" />
 							<h1>Вы ответили: {{ currentAnswer(question) }}</h1>
 							<USeparator color="neutral" />
-							<h1>Правильный ответ: {{ question.correctVariant.variant }}</h1>
+							<h1>Правильный ответ: {{ question.correctAnswer.variant }}</h1>
 						</div>
 					</div>
 				</div>

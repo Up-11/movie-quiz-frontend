@@ -8,7 +8,7 @@ const props = defineProps<{
 }>()
 
 const itemsWithLetters = computed(() =>
-	assignLettersToItems(props.question.variants)
+	assignLettersToItems(props.question.answers)
 )
 
 const {
@@ -28,7 +28,7 @@ const btnText = computed(() => (isLastQuestion.value ? 'Завершить' : '�
 	<div :class="'h-full flex-col items-center justify-center gap-5'">
 		<div class="relative mt-5 flex items-center justify-center gap-4">
 			<NuxtImg
-				:src="question.imageUrl"
+				:src="formatUrl(question.imageUrl)"
 				class="rounded-sm"
 				width="500"
 				alt="Question Image"

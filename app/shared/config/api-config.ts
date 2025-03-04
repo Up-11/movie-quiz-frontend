@@ -17,6 +17,7 @@ export const apiConfig = {
 		getAll: '/quiz/all',
 		getAllAuth: '/quiz/all-auth',
 		completeQuiz: '/quiz/complete',
+		completeQuizAuth: '/quiz/complete-auth',
 		getUserCompletions: `/quiz/completions`,
 		getQuizById: (id: string) => `/quiz/${id}`,
 		searchQuizzes: '/quiz/search',
