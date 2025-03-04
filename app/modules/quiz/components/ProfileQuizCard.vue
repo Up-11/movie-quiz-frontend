@@ -1,9 +1,9 @@
 <script lang="ts" setup>
 import { useProfileRating } from '../composables/useProfileRating'
-import type { QuizCard } from '../types'
+import type { IUserCompletion, QuizCard } from '../types'
 import vue3StarRatings from 'vue3-star-ratings'
 
-const { card } = defineProps<{ card: QuizCard }>()
+const { card } = defineProps<{ card: IUserCompletion }>()
 const emit = defineEmits(['update-rating'])
 
 const {
@@ -12,30 +12,32 @@ const {
 	toggleRatingField,
 	rating,
 	handleSaveNewRating,
-	deleteRating,
+	deleteRating
 } = useProfileRating(card, emit)
 const ratingBtnText = computed(() => {
 	return isRatingFieldOpen.value
 		? 'Закрыть'
 		: newRating.value
-		? 'Изменить оценку'
-		: 'Оценить'
+			? 'Изменить оценку'
+			: 'Оценить'
 })
 </script>
 
 <template>
 	<article
-		class="flex flex-col sm:flex-row border-2 w-full bg-black/50 hover:border-violet-400 transition-all border-zinc-300 rounded-lg p-4 gap-3"
+		class="flex w-full flex-col gap-3 rounded-lg border-2 border-zinc-300 bg-black/50 p-4 transition-all hover:border-violet-400 sm:flex-row"
 	>
-		<div class="flex flex-col gap-2 w-full justify-between h-full">
-			<div class="flex flex-wrap gap-2 items-center justify-between min-w-0">
-				<h1 class="font-bold text-sm truncate max-w-[60%]">{{ card.name }}</h1>
-				<h1 class="font-bold text-violet-200 text-xs truncate max-w-[40%]">
-					{{ card.film }}
+		<div class="flex h-full w-full flex-col justify-between gap-2">
+			<div class="flex min-w-0 flex-wrap items-center justify-between gap-2">
+				<h1 class="max-w-[60%] truncate text-sm font-bold">
+					{{ card.quiz.name }}
+				</h1>
+				<h1 class="max-w-[40%] truncate text-xs font-bold text-violet-200">
+					{{ card.quiz.film.title }}
 				</h1>
 			</div>
 
-			<div class="flex flex-wrap justify-between items-center gap-2">
+			<div class="flex flex-wrap items-center justify-between gap-2">
 				<div v-if="newRating" class="flex items-center gap-2">
 					<URating :number="newRating" />
 					<UButton @click="toggleRatingField" variant="soft" size="xs">
@@ -52,7 +54,7 @@ const ratingBtnText = computed(() => {
 
 			<div
 				v-if="isRatingFieldOpen"
-				class="grid grid-cols-2 sm:grid-cols-4 gap-3 items-center"
+				class="grid grid-cols-2 items-center gap-3 sm:grid-cols-4"
 			>
 				<vue3-star-ratings
 					star-color="#6a0dad"

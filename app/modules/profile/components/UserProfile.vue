@@ -1,19 +1,39 @@
 <script lang="ts" setup>
-import { quizCards } from '~/modules/quiz/mock'
+import { quizService } from '~/modules/quiz/service/quiz.service'
+import type { IUserCompletion } from '~/modules/quiz/types'
 
-const playedQuizCards = quizCards.filter(quiz => quiz.completed)
+const quizCompletions = ref<IUserCompletion[]>([])
 const toast = useToast()
 
 const updateQuizRating = (quizId: string, newRating: number) => {
-	const quiz = playedQuizCards.find(q => q.id === quizId)
-	if (quiz) {
-		quiz.userRating = newRating
+	mutate({ id: quizId, rating: newRating })
+	fetch()
+}
+const { mutate } = useMutation({
+	mutationFn: (data: { id: string; rating: number }) =>
+		quizService.rateQuiz(data.id, data.rating),
+	onSuccess: () => {
 		toast.add({
 			title: 'Оценка викторины обновлена',
-			description: `Оценка викторины ${quiz.name} была обновлена`,
+			description: `Оценка викторины была обновлена`
+		})
+	},
+	onError: err => {
+		toast.add({
+			title: 'Ошибка',
+			description: err.message,
+			color: 'error'
 		})
 	}
-}
+})
+
+const { fetch, isLoading } = useQuery({
+	queryFn: () => quizService.getUserCompletions(),
+	onSuccess: res => {
+		quizCompletions.value = res.data
+	},
+	enabled: true
+})
 </script>
 
 <template>
@@ -25,15 +45,17 @@ const updateQuizRating = (quizId: string, newRating: number) => {
 		<h1 class="text-2xl">Статистика</h1>
 		<UserProfileStatistics />
 		<section>
-			<h1 class="text-2xl my-4">История</h1>
+			<h1 class="my-4 text-2xl">История</h1>
 
 			<div class="flex flex-col gap-2">
 				<ProfileQuizCard
-					v-for="quiz in playedQuizCards"
+					v-if="!isLoading"
+					v-for="quiz in quizCompletions"
 					:card="quiz"
 					:key="quiz.id"
-					@update-rating="updateQuizRating(quiz.id, $event)"
+					@update-rating="updateQuizRating(quiz.quizId, $event)"
 				/>
+				<USkeleton v-for="i in 2" v-else class="h-20 w-full" />
 			</div>
 		</section>
 	</aside>

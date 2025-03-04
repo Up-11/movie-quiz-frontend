@@ -1,12 +1,12 @@
-import type { QuizCard } from '../types'
+import type { IUserCompletion } from '../types'
 
 export const useProfileRating = (
-	card: QuizCard,
+	card: IUserCompletion,
 	emit: (event: 'update-rating', ...args: any[]) => void
 ) => {
 	const isRatingFieldOpen = ref<boolean>(false)
-	const rating = ref<number>(card.userRating || 0)
-	const newRating = ref<number>(card.userRating || 0)
+	const rating = ref<number>(card.rating || 0)
+	const newRating = ref<number>(card.rating || 0)
 
 	watch(rating, newVal => {
 		rating.value = Math.round(newVal * 2) / 2
@@ -40,6 +40,6 @@ export const useProfileRating = (
 		rating,
 		newRating,
 		isRatingFieldOpen,
-		card,
+		card
 	}
 }

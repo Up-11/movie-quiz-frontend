@@ -26,27 +26,29 @@ onMounted(() => {
 <template>
 	<NuxtLink :to="ROUTES.quiz(card.id)">
 		<article
-			class="relative flex h-full max-w-[350px] cursor-pointer flex-col rounded-lg border-2 border-zinc-300 bg-black/50 shadow-2xl backdrop-blur-2xl transition-all hover:border-violet-400 hover:shadow-violet-600"
+			class="relative flex h-full w-full max-w-[350px] cursor-pointer flex-col rounded-lg border-2 border-zinc-300 bg-black/50 shadow-2xl backdrop-blur-2xl transition-all hover:border-violet-400 hover:shadow-violet-600"
 			ref="cardRef"
 		>
-			<!-- <UBadge
+			<UBadge
 				v-if="card.completed"
 				color="success"
 				class="absolute -top-3 -right-5"
 				>Пройдено</UBadge
-			> -->
-
-			<NuxtImg
-				class="aspect-auto rounded-tl-lg rounded-tr-lg object-fill"
-				width="100%"
-				height="auto"
-				:src="card.imageUrl"
-				:alt="card.name"
-				:placeholder="'blur'"
-				:loading="'lazy'"
-				:img-style="{ objectFit: 'cover' }"
-			/>
-			<div class="flex h-full flex-col justify-between gap-2 p-4">
+			>
+			<div class="h-1/2 w-full">
+				<NuxtImg
+					crossorigin="anonymous"
+					class="aspect-auto h-full w-full rounded-tl-lg rounded-tr-lg object-cover"
+					width="100%"
+					height="auto"
+					:src="formatUrl(card.imageUrl)"
+					:alt="card.name"
+					:placeholder="'blur'"
+					:loading="'lazy'"
+					:img-style="{ objectFit: 'cover' }"
+				/>
+			</div>
+			<div class="flex h-1/2 flex-col justify-between gap-2 p-4">
 				<div class="flex items-center justify-between gap-2">
 					<h1 class="font-bold">{{ card.name }}</h1>
 					<h1 class="text-sm font-bold text-violet-200">

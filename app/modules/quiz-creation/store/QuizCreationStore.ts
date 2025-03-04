@@ -21,6 +21,14 @@ export const useQuizCreationStore = defineStore('QuizCreationStore', () => {
 		newQuestions.value = []
 	}
 
+	const updateImageUrl = (url: string) => {
+		newQuiz.imageUrl = url
+	}
+
+	const updateQuestionImageUrl = (question: IQuestion, url: string) => {
+		question.imageUrl = url
+	}
+
 	const toast = useToast()
 
 	const setFilm = (filmId: string) => {
@@ -101,6 +109,8 @@ export const useQuizCreationStore = defineStore('QuizCreationStore', () => {
 		setCorrectVariant,
 		deleteQuestion,
 		setFilm,
-		createNewQuiz
+		createNewQuiz,
+		updateImageUrl,
+		updateQuestionImageUrl
 	}
 })

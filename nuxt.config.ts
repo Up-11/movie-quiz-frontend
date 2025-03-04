@@ -6,6 +6,7 @@ export default defineNuxtConfig({
 	future: {
 		compatibilityVersion: 4
 	},
+	plugins: ['~/plugins/filters.ts'],
 
 	components: [
 		{ path: '~/shared/components', prefix: '' },
@@ -16,7 +17,12 @@ export default defineNuxtConfig({
 		}
 	],
 	imports: {
-		dirs: ['composables', 'modules/**/composables', 'shared/composables']
+		dirs: [
+			'composables',
+			'modules/**/composables',
+			'shared/composables',
+			'shared/utils'
+		]
 	},
 	css: ['~/assets/css/main.css'],
 	vite: {
@@ -51,6 +57,12 @@ export default defineNuxtConfig({
 	runtimeConfig: {
 		public: {
 			apiUrl: process.env.NUXT_PUBLIC_API_URL
+		}
+	},
+	devServer: {
+		cors: {
+			origin: ['http://localhost:4000', '*'],
+			credentials: true
 		}
 	}
 })

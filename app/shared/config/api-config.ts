@@ -20,7 +20,7 @@ export const apiConfig = {
 		getUserCompletions: `/quiz/completions`,
 		getQuizById: (id: string) => `/quiz/${id}`,
 		searchQuizzes: '/quiz/search',
-		rateQuiz: (id: string) => `/quiz/rate/${id}`,
+		rateQuiz: (id: string) => `/rating/${id}`,
 		createQuiz: '/quiz/create',
 		deleteQuiz: (id: string) => `/quiz/delete/${id}`
 	},
@@ -28,6 +28,7 @@ export const apiConfig = {
 		getAllFilms: '/film',
 		deleteFilm: (id: string) => `/film/delete/${id}`,
 		addFilm: '/film/add'
-	}
+	},
+	media: '/media'
 }
 export type ApiConfig = typeof apiConfig

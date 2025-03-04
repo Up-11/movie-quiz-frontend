@@ -1,17 +1,8 @@
 <script lang="ts" setup>
-import { AdminService } from '~/modules/admin/service/admin.service'
+import ImageUploader from '~/shared/components/ImageUploader.vue'
 import { useFileUploading } from '../composables/useFileUploading'
+import { useHandleFilms } from '../composables/useHandleFilms'
 import { useQuizCreationStore } from '../store/QuizCreationStore'
-import type { IFilmDto } from '~/modules/admin/service/admin.service.dto'
-
-const toast = useToast()
-
-const selectItems = ref<IFilmDto[]>([])
-
-const initialSelectValue = {
-	label: 'Выберите фильм'
-}
-const selectValue = ref(initialSelectValue)
 
 const store = useQuizCreationStore()
 
@@ -19,76 +10,16 @@ const { handleFileChange } = useFileUploading()
 
 const isSelectOpen = ref<boolean>(false)
 
-const onSelectChange = () => {
-	if (selectItems.value.length === 0) {
-		fetchFilms()
-	}
-}
-
-const createFilm = (item: string) => {
-	addFilm(item)
-}
-
-const { mutate: deleteFilm } = useMutation({
-	mutationFn: (title: string) => AdminService.deleteFilm(title),
-	onSuccess: () => {
-		toast.add({
-			title: 'Успех',
-			description: 'Фильм успешно удален.',
-			color: 'success'
-		})
-		fetchFilms()
-		selectValue.value = initialSelectValue
-	},
-	onError: err => {
-		toast.add({
-			title: 'Ошибка',
-			description: err.message,
-			color: 'error'
-		})
-	}
-})
-
-const { mutate: addFilm } = useMutation({
-	mutationFn: (title: string) => AdminService.createFilm(title),
-	onSuccess: () => {
-		toast.add({
-			title: 'Успех',
-			description: 'Фильм успешно создан.',
-			color: 'success'
-		})
-		fetchFilms()
-	},
-	onError: err => {
-		toast.add({
-			title: 'Ошибка',
-			description: err.message,
-			color: 'error'
-		})
-	}
-})
-
 const {
-	fetch: fetchFilms,
-	data: films,
-	isLoading: filmsLoading
-} = useQuery({
-	queryFn: () => AdminService.getFilms(),
-	onSuccess: res => {
-		selectItems.value = res.data.map(film => ({
-			...film,
-			label: film.title
-		}))
-	}
-})
-
-const onChangeSelect = () => {
-	const currentFilmId = films?.value?.data?.find(
-		film => film.title === selectValue.value.label
-	)?.id
-
-	store.setFilm(currentFilmId!)
-}
+	createFilm,
+	films,
+	filmsLoading,
+	selectValue,
+	selectItems,
+	onChangeSelect,
+	onSelectChange,
+	deleteFilm
+} = useHandleFilms()
 </script>
 
 <template>
@@ -104,22 +35,12 @@ const onChangeSelect = () => {
 				class="w-full md:col-span-2"
 			/>
 		</div>
-		<div class="grid grid-cols-1 items-center gap-3 md:grid-cols-3">
+		<div class="grid w-full grid-cols-1 items-center gap-3 md:grid-cols-3">
 			<h1 class="text-xl font-bold">Обложка викторины:</h1>
-			<UInput
-				type="file"
-				name="quiz-name"
-				variant="soft"
-				size="xl"
-				accept="image/*"
-				class="w-full md:col-span-1"
-				@change="e => handleFileChange(e, toRef(store.newQuiz, 'imageUrl'))"
-			/>
-			<NuxtImg
-				v-if="store.newQuiz.imageUrl"
-				class="col-start-3 h-60 w-full self-end rounded-lg object-contain"
-				:src="store.newQuiz.imageUrl"
-				width="300"
+			<ImageUploader
+				class="w-full md:col-span-2"
+				:model-value="store.newQuiz.imageUrl"
+				@update:model-value="store.updateImageUrl"
 			/>
 		</div>
 

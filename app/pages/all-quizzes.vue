@@ -52,12 +52,29 @@ useHead({
 
 const items = ref<IQuizDto[]>([])
 
-useQuery({
+const authStore = useAuthStore()
+
+watch(
+	() => authStore.isAuth,
+	() => (authStore.isAuth ? fetchAuthorized() : fetchUnauthorized())
+)
+
+onMounted(() => {
+	authStore.isAuth ? fetchAuthorized() : fetchUnauthorized()
+})
+
+const { fetch: fetchAuthorized } = useQuery({
+	queryFn: () => quizService.getAllAuth(),
+	onSuccess: res => {
+		items.value = res.data
+	}
+})
+
+const { fetch: fetchUnauthorized } = useQuery({
 	queryFn: () => quizService.getAllQuizzes(),
 	onSuccess: res => {
 		items.value = res.data
-	},
-	enabled: true
+	}
 })
 </script>
 <template>

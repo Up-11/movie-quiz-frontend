@@ -65,4 +65,24 @@ export interface IQuizDto {
 		completions: number
 	}
 	rating: number
+	completed?: boolean
 }
+export interface IUserCompletion {
+	id: string
+	quizId: string
+	userId: string
+	rating: number
+	correctAnswers: number
+	failedAnswers: number
+	quiz: {
+		id: string
+		name: string
+		imageUrl: string
+		description: string
+		film: {
+			title: string
+		}
+	}
+}
+
+export type SearchType = 'name' | 'film'

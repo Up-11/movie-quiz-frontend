@@ -44,19 +44,10 @@ const { handleFileChange } = useFileUploading()
 		</div>
 
 		<div class="flex h-full flex-col justify-between gap-3">
-			<UInput
-				size="xl"
-				variant="soft"
-				type="file"
-				accept="image/*"
-				@change="e => handleFileChange(e, toRef(props.question, 'imageUrl'))"
-				placeholder="Загрузите изображение"
-			/>
-			<NuxtImg
-				v-if="question.imageUrl"
-				class="max-h-50 w-full flex-1 rounded-lg object-contain"
-				:src="question.imageUrl"
-				width="300"
+			<ImageUploader
+				:is-question="true"
+				:model-value="question.imageUrl"
+				@update:model-value="store.updateQuestionImageUrl(question, $event)"
 			/>
 			<UButton
 				@click="() => store.deleteQuestion(question)"
