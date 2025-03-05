@@ -26,7 +26,7 @@ onMounted(() => {
 <template>
 	<NuxtLink :to="ROUTES.quiz(card.id)">
 		<article
-			class="relative flex h-full w-full max-w-[350px] cursor-pointer flex-col rounded-lg border-2 border-zinc-300 bg-black/50 shadow-2xl backdrop-blur-2xl transition-all hover:border-violet-400 hover:shadow-violet-600"
+			class="relative flex h-full w-[300px] cursor-pointer flex-col rounded-lg border-2 border-zinc-300 bg-black/50 shadow-2xl backdrop-blur-2xl transition-all hover:border-violet-400 hover:shadow-violet-600"
 			ref="cardRef"
 		>
 			<UBadge

@@ -14,25 +14,27 @@ const {
 
 <template>
 	<header
-		class="fixed inset-x-0 z-200 flex items-center justify-between border-b border-b-zinc-300 bg-black/50 p-2 backdrop-blur-2xl"
+		class="fixed inset-x-0 z-200 flex flex-wrap items-center justify-between border-b border-b-zinc-300 bg-black/50 p-3 backdrop-blur-2xl sm:p-4"
 	>
-		<div class="flex items-center gap-3">
-			<h1 class="font-bold">
+		<div class="flex flex-wrap items-center gap-3">
+			<h1 class="text-sm font-bold sm:text-lg">
 				{{ currentQuiz.name }}
 			</h1>
+
 			<div
 				v-if="isStarted && !currentQuiz.isFinished"
-				class="flex items-center gap-3"
+				class="flex flex-wrap items-center gap-3"
 			>
 				<div
-					class="flex w-60 cursor-default flex-col items-center self-center select-none"
+					class="flex w-full max-w-sm flex-col items-center self-center select-none"
 				>
-					<p class="font-bold text-indigo-200">
+					<p class="text-xs font-bold text-indigo-200 sm:text-base">
 						Вопрос {{ questionIndex }}/{{ currentQuiz.questionsCount }}
 					</p>
 					<UProgress
 						v-model="questionIndex"
 						:max="currentQuiz.questionsCount"
+						class="w-full"
 					/>
 				</div>
 				<UButton
@@ -43,16 +45,21 @@ const {
 					variant="ghost"
 				/>
 			</div>
-			<h1 v-else-if="currentQuiz.isFinished" class="font-bold text-violet-200">
+
+			<h1
+				v-else-if="currentQuiz.isFinished"
+				class="text-sm font-bold text-violet-200 sm:text-lg"
+			>
 				Викторина пройдена!
 			</h1>
 			<UButton v-else variant="soft" @click="startCompletion"> Начать </UButton>
 		</div>
 
-		<div class="flex items-center gap-2">
+		<div class="mt-2 flex flex-wrap items-center gap-2 sm:mt-0">
 			<UButton variant="ghost" icon="i-lucide-trash" @click="restartCompletion">
-				Сброс </UButton
-			><UButton variant="ghost" icon="i-lucide-home" :to="ROUTES.allQuizzes">
+				Сброс
+			</UButton>
+			<UButton variant="ghost" icon="i-lucide-home" :to="ROUTES.allQuizzes">
 				Выход
 			</UButton>
 		</div>

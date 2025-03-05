@@ -1,8 +1,6 @@
 <script lang="ts" setup>
 import { AdminService } from '~/modules/admin/service/admin.service'
 import type { IUserDto } from '~/modules/admin/service/admin.service.dto'
-import { ROUTES } from '~/shared/config/routes'
-import { mockUsers } from '~/shared/mock/mock'
 import { USER_ROLE } from '~/shared/types/common.types'
 
 definePageMeta({
@@ -14,7 +12,7 @@ const admins = ref<IUserDto[]>([])
 const searchTerm = ref<string>('')
 const isSearching = ref<boolean>(false)
 
-const { data, fetch, isLoading } = useQuery({
+const { fetch, isLoading } = useQuery({
 	queryFn: () => AdminService.getUsers(USER_ROLE.ADMIN, searchTerm.value),
 	enabled: true,
 	onSuccess(data) {
@@ -34,7 +32,7 @@ watchDebounced(
 
 <template>
 	<section class="flex flex-col gap-5 p-4">
-		<header class="flex justify-between p-4">
+		<header class="flex flex-wrap justify-between p-4">
 			<h1 class="text-bold text-2xl">Администраторы</h1>
 			<AddAdminModal @refetch-admins="fetch">
 				<template #trigger>

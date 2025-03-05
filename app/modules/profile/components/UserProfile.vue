@@ -7,7 +7,6 @@ const toast = useToast()
 
 const updateQuizRating = (quizId: string, newRating: number) => {
 	mutate({ id: quizId, rating: newRating })
-	fetch()
 }
 const { mutate } = useMutation({
 	mutationFn: (data: { id: string; rating: number }) =>
@@ -17,6 +16,7 @@ const { mutate } = useMutation({
 			title: 'Оценка викторины обновлена',
 			description: `Оценка викторины была обновлена`
 		})
+		fetch()
 	},
 	onError: err => {
 		toast.add({

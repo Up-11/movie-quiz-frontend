@@ -25,17 +25,22 @@ const btnText = computed(() => (isLastQuestion.value ? 'Завершить' : '�
 </script>
 
 <template>
-	<div :class="'h-full flex-col items-center justify-center gap-5'">
-		<div class="relative mt-5 flex items-center justify-center gap-4">
+	<div
+		class="flex flex-col items-center justify-center gap-5 px-4 sm:px-6 lg:px-8"
+	>
+		<div class="relative mt-5 flex flex-col items-center gap-4">
 			<NuxtImg
 				:src="formatUrl(question.imageUrl)"
-				class="rounded-sm"
+				class="h-auto w-auto max-w-full rounded-sm"
 				width="500"
 				alt="Question Image"
 			/>
 		</div>
-		<div class="flex items-center gap-4">
-			<h1 class="mt-3 text-3xl font-bold">{{ question.question }}</h1>
+
+		<div class="flex flex-wrap items-center justify-center gap-4 text-center">
+			<h1 class="mt-3 text-2xl font-bold sm:text-3xl">
+				{{ question.question }}
+			</h1>
 			<UPopover v-if="hasAnswer">
 				<UButton
 					variant="soft"
@@ -44,11 +49,12 @@ const btnText = computed(() => (isLastQuestion.value ? 'Завершить' : '�
 					class="self-center"
 				/>
 				<template #content>
-					<div class="p-4">{{ question.description }}</div>
+					<div class="p-4 text-sm sm:text-base">{{ question.description }}</div>
 				</template>
 			</UPopover>
 		</div>
-		<div class="mt-5 flex flex-col items-center justify-center gap-5">
+
+		<div class="mt-5 flex w-full flex-col items-center justify-center gap-5">
 			<VariantComponent
 				v-for="item in itemsWithLetters"
 				@create-answer="createUserAnswer"
@@ -58,12 +64,14 @@ const btnText = computed(() => (isLastQuestion.value ? 'Завершить' : '�
 				:should-show-confetti="isAnswerCorrect(item)"
 				:is-correct="showCorrectAnswer === item.id"
 				:is-failed="isAnswerFailed(item)"
+				class="w-full max-w-lg"
 			/>
+
 			<UButton
 				:disabled="!hasAnswer"
 				@click="nextQuestion"
 				variant="soft"
-				class="mb-20 rounded-2xl px-24 py-4 text-2xl"
+				class="mb-10 w-full max-w-xs rounded-2xl px-6 py-3 text-lg sm:max-w-md sm:text-xl lg:max-w-lg"
 			>
 				{{ btnText }}
 			</UButton>
