@@ -20,7 +20,6 @@ export type AnswerVariant = {
 	id: string
 	variant: string
 	letter?: string
-	questionId: string
 }
 
 export type Question = {
