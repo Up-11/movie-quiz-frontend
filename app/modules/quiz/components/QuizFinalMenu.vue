@@ -110,7 +110,7 @@ onUnmounted(() => {
 				>
 					<div
 						v-for="(question, index) in quiz.questions"
-						class="mx-auto flex h-full min-h-90 w-full max-w-100 flex-col self-center rounded-xl bg-black/70 backdrop-blur-2xl"
+						class="mx-auto flex h-full w-full max-w-100 flex-col self-center rounded-xl bg-black/70 backdrop-blur-2xl"
 					>
 						<div class="flex flex-col justify-between gap-4 p-4">
 							<h1>Вопрос #{{ index + 1 }}: {{ question.question }}</h1>
