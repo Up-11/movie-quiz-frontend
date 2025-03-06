@@ -57,11 +57,5 @@ export default defineNuxtConfig({
 		public: {
 			apiUrl: process.env.NUXT_PUBLIC_API_URL
 		}
-	},
-	devServer: {
-		cors: {
-			origin: ['http://localhost:4000', '*'],
-			credentials: true
-		}
 	}
 })
