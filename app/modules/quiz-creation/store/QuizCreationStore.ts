@@ -5,7 +5,7 @@ import { quizService } from '~/modules/quiz/service/quiz.service'
 import { v4 as uuidv4 } from 'uuid'
 
 export const useQuizCreationStore = defineStore('QuizCreationStore', () => {
-	const newQuiz = reactive<QuizCreation>({
+	const newQuiz = ref<QuizCreation>({
 		id: uuidv4(),
 		name: '',
 		imageUrl: '',
@@ -14,16 +14,16 @@ export const useQuizCreationStore = defineStore('QuizCreationStore', () => {
 	})
 
 	const resetQuiz = () => {
-		newQuiz.id = uuidv4()
-		newQuiz.name = 'Новая викторина'
-		newQuiz.imageUrl = ''
-		newQuiz.description = 'Описание новой викторины'
-		newQuiz.film = ''
+		newQuiz.value.id = uuidv4()
+		newQuiz.value.name = ''
+		newQuiz.value.imageUrl = ''
+		newQuiz.value.description = ' '
+		newQuiz.value.film = ''
 		newQuestions.value = []
 	}
 
 	const updateImageUrl = (url: string) => {
-		newQuiz.imageUrl = url
+		newQuiz.value.imageUrl = url
 	}
 
 	const updateQuestionImageUrl = (question: IQuestion, url: string) => {
@@ -33,7 +33,7 @@ export const useQuizCreationStore = defineStore('QuizCreationStore', () => {
 	const toast = useToast()
 
 	const setFilm = (filmId: string) => {
-		newQuiz.film = filmId
+		newQuiz.value.film = filmId
 	}
 	const newQuestions = ref<IQuestion[]>([])
 	const addQuestion = () => {
@@ -44,7 +44,7 @@ export const useQuizCreationStore = defineStore('QuizCreationStore', () => {
 			description: 'Описание нового вопроса',
 			question: 'Новый вопрос',
 			answers: newVariants,
-			quizId: newQuiz.id,
+			quizId: newQuiz.value.id,
 			correctAnswerId: newVariants[1]!.id
 		}
 		newQuestions.value.push(newQuestion)
@@ -91,12 +91,12 @@ export const useQuizCreationStore = defineStore('QuizCreationStore', () => {
 
 	const createNewQuiz = () => {
 		const data: Quiz = {
-			id: newQuiz.id,
-			name: newQuiz.name,
-			description: newQuiz.description,
-			imageUrl: newQuiz.imageUrl,
+			id: newQuiz.value.id,
+			name: newQuiz.value.name,
+			description: newQuiz.value.description,
+			imageUrl: newQuiz.value.imageUrl,
 			rating: null,
-			filmId: newQuiz.film,
+			filmId: newQuiz.value.film,
 			questions: toRaw(newQuestions.value)
 		}
 		mutate(data)
