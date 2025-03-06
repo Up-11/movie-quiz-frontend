@@ -9,11 +9,9 @@ export const useHandleFilms = () => {
 	const selectItems = ref<IFilmDto[]>([])
 
 	const initialSelectValue = {
-		id: '',
-		label: 'Выберите фильм',
-		title: ''
+		label: 'Выберите фильм'
 	}
-	const selectValue = ref<IFilmDto>(initialSelectValue)
+	const selectValue = ref(initialSelectValue)
 
 	const createFilm = (item: string) => {
 		addFilm(item)
@@ -77,13 +75,8 @@ export const useHandleFilms = () => {
 			film => film.title === selectValue.value.label
 		)?.id
 
-		if (currentFilmId) {
-			store.setFilm(currentFilmId)
-		} else {
-			console.error('Film not found!')
-		}
+		store.setFilm(currentFilmId!)
 	}
-
 	const onSelectChange = () => {
 		if (selectItems.value.length === 0) {
 			fetchFilms()

@@ -23,7 +23,7 @@ const {
 
 			<div
 				v-if="isStarted && !currentQuiz.isFinished"
-				class="flex items-center gap-3"
+				class="flex flex-wrap items-center gap-3"
 			>
 				<div
 					class="flex w-full max-w-sm flex-col items-center self-center select-none"
