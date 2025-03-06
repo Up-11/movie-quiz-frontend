@@ -52,10 +52,10 @@ export const useQuizCreationStore = defineStore('QuizCreationStore', () => {
 
 	const createVariants = () => {
 		return [
-			{ id: crypto.randomUUID(), variant: 'Вариант 1' },
-			{ id: crypto.randomUUID(), variant: 'Вариант 2' },
-			{ id: crypto.randomUUID(), variant: 'Вариант 3' },
-			{ id: crypto.randomUUID(), variant: 'Вариант 4' }
+			{ id: uuidv4(), variant: 'Вариант 1' },
+			{ id: uuidv4(), variant: 'Вариант 2' },
+			{ id: uuidv4(), variant: 'Вариант 3' },
+			{ id: uuidv4(), variant: 'Вариант 4' }
 		]
 	}
 
