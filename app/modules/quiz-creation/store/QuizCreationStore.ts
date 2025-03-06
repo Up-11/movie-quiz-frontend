@@ -1,11 +1,12 @@
 import { defineStore } from 'pinia'
-import type { AnswerVariant, Question } from '~/modules/quiz/types'
+import type { AnswerVariant } from '~/modules/quiz/types'
 import type { IQuestion, Quiz, QuizCreation } from '../types'
 import { quizService } from '~/modules/quiz/service/quiz.service'
+import { v4 as uuidv4 } from 'uuid'
 
 export const useQuizCreationStore = defineStore('QuizCreationStore', () => {
 	const newQuiz = reactive<QuizCreation>({
-		id: crypto.randomUUID(),
+		id: uuidv4(),
 		name: 'Новая викторина',
 		imageUrl: '',
 		description: 'Описание новой викторины',
@@ -13,7 +14,7 @@ export const useQuizCreationStore = defineStore('QuizCreationStore', () => {
 	})
 
 	const resetQuiz = () => {
-		newQuiz.id = crypto.randomUUID()
+		newQuiz.id = uuidv4()
 		newQuiz.name = 'Новая викторина'
 		newQuiz.imageUrl = ''
 		newQuiz.description = 'Описание новой викторины'
@@ -38,7 +39,7 @@ export const useQuizCreationStore = defineStore('QuizCreationStore', () => {
 	const addQuestion = () => {
 		const newVariants = createVariants()
 		const newQuestion: IQuestion = {
-			id: crypto.randomUUID(),
+			id: uuidv4(),
 			imageUrl: '',
 			description: 'Описание нового вопроса',
 			question: 'Новый вопрос',

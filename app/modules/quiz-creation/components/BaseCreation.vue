@@ -6,8 +6,6 @@ import { useQuizCreationStore } from '../store/QuizCreationStore'
 
 const store = useQuizCreationStore()
 
-const { handleFileChange } = useFileUploading()
-
 const isSelectOpen = ref<boolean>(false)
 
 const {
@@ -93,7 +91,7 @@ const {
 						</h1>
 						<UButton
 							variant="soft"
-							@click="() => deleteFilm(item.label)"
+							@click="deleteFilm(item.label)"
 							size="xs"
 							icon="i-lucide-x"
 						></UButton></div
