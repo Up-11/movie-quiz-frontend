@@ -29,12 +29,11 @@ const {
 	deleteCachedQuizByQuiz
 } = useQuizCompletion()
 
-const correctAnswersPercent = computed(() =>
-	Math.round(
+const correctAnswersPercent = computed(
+	() =>
 		(correctAnswers.value.length /
 			(correctAnswers.value.length + failedAnswers.value.length)) *
-			100
-	)
+		100
 )
 
 onMounted(() => {
@@ -110,9 +109,13 @@ onUnmounted(() => {
 				>
 					<div
 						v-for="(question, index) in quiz.questions"
-						class="mx-auto flex h-full w-full max-w-100 flex-col self-center rounded-xl bg-black/70 backdrop-blur-2xl"
+						class="mx-auto flex h-full min-h-90 w-full max-w-100 flex-col self-center rounded-xl bg-black/70 backdrop-blur-2xl"
 					>
-						<div class="flex flex-col justify-between gap-4 p-4">
+						<NuxtImg
+							:src="formatUrl(question.imageUrl)"
+							class="h-1/2 w-full rounded-tl-lg rounded-tr-lg object-cover"
+						/>
+						<div class="flex h-1/2 flex-col justify-between gap-4 p-4">
 							<h1>Вопрос #{{ index + 1 }}: {{ question.question }}</h1>
 							<USeparator color="neutral" />
 							<h1>Вы ответили: {{ currentAnswer(question) }}</h1>
