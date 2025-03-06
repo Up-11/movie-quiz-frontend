@@ -1,3 +1,5 @@
 export default function formatUrl(path: string) {
-	return `http://localhost:4000/${path}`
+	const config = useRuntimeConfig()
+
+	return `${config.public.baseUrl}/${path}`
 }

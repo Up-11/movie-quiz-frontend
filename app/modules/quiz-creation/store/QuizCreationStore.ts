@@ -78,8 +78,6 @@ export const useQuizCreationStore = defineStore('QuizCreationStore', () => {
 				description: 'Викторина успешно создана',
 				color: 'success'
 			})
-			console.log('suc')
-
 			resetQuiz()
 		},
 		onError: err => {
