@@ -31,7 +31,7 @@ const btnText = computed(() => (isLastQuestion.value ? 'Завершить' : '�
 		<div class="relative mt-5 flex flex-col items-center gap-4">
 			<NuxtImg
 				:src="formatUrl(question.imageUrl)"
-				class="h-auto w-auto max-w-full rounded-sm"
+				class="h-auto max-h-[300px] w-auto max-w-full rounded-sm object-fill"
 				width="500"
 				alt="Question Image"
 			/>
