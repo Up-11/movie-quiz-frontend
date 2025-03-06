@@ -7,9 +7,9 @@ import { v4 as uuidv4 } from 'uuid'
 export const useQuizCreationStore = defineStore('QuizCreationStore', () => {
 	const newQuiz = reactive<QuizCreation>({
 		id: uuidv4(),
-		name: 'Новая викторина',
+		name: '',
 		imageUrl: '',
-		description: 'Описание новой викторины',
+		description: '',
 		film: ''
 	})
 
