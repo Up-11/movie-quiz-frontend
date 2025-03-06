@@ -8,8 +8,8 @@ const store = useQuizCreationStore()
 </script>
 
 <template>
-	<div class="grid grid-cols-2 gap-6 md:grid-cols-3">
-		<div class="flex flex-col gap-4">
+	<div class="grid grid-cols-3 gap-6 md:grid-cols-3">
+		<div class="col-span-2 flex flex-col gap-4">
 			<UInput
 				size="xl"
 				variant="soft"
