@@ -26,7 +26,7 @@ onMounted(() => {
 <template>
 	<NuxtLink :to="ROUTES.quiz(card.id)">
 		<article
-			class="relative flex h-full  w-[300px] cursor-pointer flex-col rounded-lg border-2 border-zinc-300 bg-black/50 shadow-2xl backdrop-blur-2xl transition-all hover:border-violet-400 hover:shadow-violet-600"
+			class="relative flex h-full w-[300px] cursor-pointer flex-col rounded-lg border-2 border-zinc-300 bg-black/50 shadow-2xl backdrop-blur-2xl transition-all hover:border-violet-400 hover:shadow-violet-600"
 			ref="cardRef"
 		>
 			<UBadge
@@ -48,7 +48,7 @@ onMounted(() => {
 					:img-style="{ objectFit: 'cover' }"
 				/>
 			</div>
-			<div class="flex h-1/2 flex-col justify-between gap-2 p-4">
+			<div class="flex h-1/2 flex-col justify-between gap-4 p-4">
 				<div class="flex items-center justify-between gap-2">
 					<h1 class="font-bold">{{ card.name }}</h1>
 					<h1 class="text-sm font-bold text-violet-200">
