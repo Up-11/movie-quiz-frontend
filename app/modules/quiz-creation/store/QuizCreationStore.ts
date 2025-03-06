@@ -7,17 +7,17 @@ import { v4 as uuidv4 } from 'uuid'
 export const useQuizCreationStore = defineStore('QuizCreationStore', () => {
 	const newQuiz = ref<QuizCreation>({
 		id: uuidv4(),
-		name: '',
 		imageUrl: '',
-		description: '',
 		film: ''
 	})
+	const name = ref<string>('')
+	const description = ref<string>('')
 
 	const resetQuiz = () => {
 		newQuiz.value.id = uuidv4()
-		newQuiz.value.name = ''
+		name.value = ''
 		newQuiz.value.imageUrl = ''
-		newQuiz.value.description = ' '
+		description.value = ' '
 		newQuiz.value.film = ''
 		newQuestions.value = []
 	}
@@ -92,8 +92,8 @@ export const useQuizCreationStore = defineStore('QuizCreationStore', () => {
 	const createNewQuiz = () => {
 		const data: Quiz = {
 			id: newQuiz.value.id,
-			name: newQuiz.value.name,
-			description: newQuiz.value.description,
+			name: name.value,
+			description: description.value,
 			imageUrl: newQuiz.value.imageUrl,
 			rating: null,
 			filmId: newQuiz.value.film,
@@ -110,6 +110,8 @@ export const useQuizCreationStore = defineStore('QuizCreationStore', () => {
 		setFilm,
 		createNewQuiz,
 		updateImageUrl,
-		updateQuestionImageUrl
+		updateQuestionImageUrl,
+		name,
+		description
 	}
 })

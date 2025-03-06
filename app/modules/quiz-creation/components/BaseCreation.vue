@@ -26,7 +26,7 @@ const {
 			<h1 class="text-xl font-bold">Название викторины:</h1>
 			<UInput
 				placeholder="Введите название"
-				:model-value="store.newQuiz.name"
+				:model-value="store.name"
 				name="quiz-name"
 				variant="soft"
 				size="xl"
@@ -48,7 +48,7 @@ const {
 				placeholder="Введите описание"
 				name="quiz-description"
 				variant="soft"
-				:model-value="store.newQuiz.description"
+				:model-value="store.description"
 				size="xl"
 				:rows="5"
 				:autoresize="true"
