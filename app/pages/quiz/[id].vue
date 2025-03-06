@@ -81,7 +81,7 @@ onUnmounted(() => {
 
 <template>
 	<SkeletonPreview v-if="isLoading" />
-	<div v-else class="mt-52 flex h-full justify-center">
+	<div v-else class="mt-44 flex h-full justify-center">
 		<Transition v-if="currentQuiz && !isStarted" name="bounce" appear>
 			<QuizPreview v-if="currentQuiz && !isStarted" :quiz="currentQuiz" />
 		</Transition>

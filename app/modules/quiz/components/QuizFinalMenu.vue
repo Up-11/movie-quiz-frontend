@@ -114,7 +114,7 @@ onUnmounted(() => {
 					>
 						<NuxtImg
 							:src="formatUrl(question.imageUrl)"
-							class="h-1/2 w-full rounded-tl-lg rounded-tr-lg object-cover"
+							class="h-1/2 w-full rounded-tl-lg rounded-tr-lg object-fill"
 						/>
 						<div class="flex h-1/2 flex-col justify-between gap-4 p-4">
 							<h1>Вопрос #{{ index + 1 }}: {{ question.question }}</h1>
