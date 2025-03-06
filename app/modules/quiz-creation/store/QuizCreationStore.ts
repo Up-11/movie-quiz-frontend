@@ -1,28 +1,29 @@
 import { defineStore } from 'pinia'
-import type { AnswerVariant, Question } from '~/modules/quiz/types'
+import type { AnswerVariant } from '~/modules/quiz/types'
 import type { IQuestion, Quiz, QuizCreation } from '../types'
 import { quizService } from '~/modules/quiz/service/quiz.service'
+import { v4 as uuidv4 } from 'uuid'
 
 export const useQuizCreationStore = defineStore('QuizCreationStore', () => {
-	const newQuiz = reactive<QuizCreation>({
-		id: crypto.randomUUID(),
-		name: 'Новая викторина',
+	const newQuiz = ref<QuizCreation>({
+		id: uuidv4(),
 		imageUrl: '',
-		description: 'Описание новой викторины',
 		film: ''
 	})
+	const name = ref<string>('')
+	const description = ref<string>('')
 
 	const resetQuiz = () => {
-		newQuiz.id = crypto.randomUUID()
-		newQuiz.name = 'Новая викторина'
-		newQuiz.imageUrl = ''
-		newQuiz.description = 'Описание новой викторины'
-		newQuiz.film = ''
+		newQuiz.value.id = uuidv4()
+		name.value = ''
+		newQuiz.value.imageUrl = ''
+		description.value = ' '
+		newQuiz.value.film = ''
 		newQuestions.value = []
 	}
 
 	const updateImageUrl = (url: string) => {
-		newQuiz.imageUrl = url
+		newQuiz.value.imageUrl = url
 	}
 
 	const updateQuestionImageUrl = (question: IQuestion, url: string) => {
@@ -32,18 +33,18 @@ export const useQuizCreationStore = defineStore('QuizCreationStore', () => {
 	const toast = useToast()
 
 	const setFilm = (filmId: string) => {
-		newQuiz.film = filmId
+		newQuiz.value.film = filmId
 	}
 	const newQuestions = ref<IQuestion[]>([])
 	const addQuestion = () => {
 		const newVariants = createVariants()
 		const newQuestion: IQuestion = {
-			id: crypto.randomUUID(),
+			id: uuidv4(),
 			imageUrl: '',
 			description: 'Описание нового вопроса',
 			question: 'Новый вопрос',
 			answers: newVariants,
-			quizId: newQuiz.id,
+			quizId: newQuiz.value.id,
 			correctAnswerId: newVariants[1]!.id
 		}
 		newQuestions.value.push(newQuestion)
@@ -51,10 +52,10 @@ export const useQuizCreationStore = defineStore('QuizCreationStore', () => {
 
 	const createVariants = () => {
 		return [
-			{ id: crypto.randomUUID(), variant: 'Вариант 1' },
-			{ id: crypto.randomUUID(), variant: 'Вариант 2' },
-			{ id: crypto.randomUUID(), variant: 'Вариант 3' },
-			{ id: crypto.randomUUID(), variant: 'Вариант 4' }
+			{ id: uuidv4(), variant: 'Вариант 1' },
+			{ id: uuidv4(), variant: 'Вариант 2' },
+			{ id: uuidv4(), variant: 'Вариант 3' },
+			{ id: uuidv4(), variant: 'Вариант 4' }
 		]
 	}
 
@@ -77,8 +78,6 @@ export const useQuizCreationStore = defineStore('QuizCreationStore', () => {
 				description: 'Викторина успешно создана',
 				color: 'success'
 			})
-			console.log('suc')
-
 			resetQuiz()
 		},
 		onError: err => {
@@ -92,12 +91,12 @@ export const useQuizCreationStore = defineStore('QuizCreationStore', () => {
 
 	const createNewQuiz = () => {
 		const data: Quiz = {
-			id: newQuiz.id,
-			name: newQuiz.name,
-			description: newQuiz.description,
-			imageUrl: newQuiz.imageUrl,
+			id: newQuiz.value.id,
+			name: name.value,
+			description: description.value,
+			imageUrl: newQuiz.value.imageUrl,
 			rating: null,
-			filmId: newQuiz.film,
+			filmId: newQuiz.value.film,
 			questions: toRaw(newQuestions.value)
 		}
 		mutate(data)
@@ -111,6 +110,8 @@ export const useQuizCreationStore = defineStore('QuizCreationStore', () => {
 		setFilm,
 		createNewQuiz,
 		updateImageUrl,
-		updateQuestionImageUrl
+		updateQuestionImageUrl,
+		name,
+		description
 	}
 })

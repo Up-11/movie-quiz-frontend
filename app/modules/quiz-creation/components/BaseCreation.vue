@@ -6,8 +6,6 @@ import { useQuizCreationStore } from '../store/QuizCreationStore'
 
 const store = useQuizCreationStore()
 
-const { handleFileChange } = useFileUploading()
-
 const isSelectOpen = ref<boolean>(false)
 
 const {
@@ -28,7 +26,7 @@ const {
 			<h1 class="text-xl font-bold">Название викторины:</h1>
 			<UInput
 				placeholder="Введите название"
-				:model-value="store.newQuiz.name"
+				v-model="store.name"
 				name="quiz-name"
 				variant="soft"
 				size="xl"
@@ -50,7 +48,7 @@ const {
 				placeholder="Введите описание"
 				name="quiz-description"
 				variant="soft"
-				:model-value="store.newQuiz.description"
+				v-model="store.description"
 				size="xl"
 				:rows="5"
 				:autoresize="true"
@@ -69,7 +67,7 @@ const {
 				variant="soft"
 				:loading="filmsLoading"
 				v-model:open="isSelectOpen"
-				v-model="selectValue as any"
+				v-model="selectValue"
 				@update:model-value="onChangeSelect"
 				:items="selectItems"
 				@update:open="onSelectChange"

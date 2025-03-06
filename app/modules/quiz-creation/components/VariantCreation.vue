@@ -30,6 +30,7 @@ const btnIconColor = computed(() => (props.isCorrect ? 'success' : 'neutral'))
 			icon="uil:check-circle"
 		/>
 		<UInput
+			class="w-full"
 			size="xl"
 			variant="soft"
 			type="text"
