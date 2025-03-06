@@ -29,11 +29,12 @@ const {
 	deleteCachedQuizByQuiz
 } = useQuizCompletion()
 
-const correctAnswersPercent = computed(
-	() =>
+const correctAnswersPercent = computed(() =>
+	Math.round(
 		(correctAnswers.value.length /
 			(correctAnswers.value.length + failedAnswers.value.length)) *
-		100
+			100
+	)
 )
 
 onMounted(() => {

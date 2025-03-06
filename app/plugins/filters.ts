@@ -1,5 +1,7 @@
 export default defineNuxtPlugin(nuxtApp => {
+	const config = useRuntimeConfig()
+
 	nuxtApp.vueApp.config.globalProperties.$formatUrl = (path: string) => {
-		return `http://localhost:4000/${path}`
+		return `${config.public.baseUrl}/${path}`
 	}
 })
