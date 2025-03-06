@@ -8,7 +8,7 @@ const store = useQuizCreationStore()
 </script>
 
 <template>
-	<div class="grid grid-cols-1 gap-6 md:grid-cols-3">
+	<div class="grid grid-cols-2 gap-6 md:grid-cols-3">
 		<div class="flex flex-col gap-4">
 			<UInput
 				size="xl"
@@ -27,7 +27,7 @@ const store = useQuizCreationStore()
 			/>
 		</div>
 
-		<div class="md:col-span-2">
+		<div class="md:col-span-">
 			<UTextarea
 				placeholder="Введите описание"
 				name="quiz-description"
@@ -38,20 +38,6 @@ const store = useQuizCreationStore()
 				v-model="question.description"
 				class="w-full !resize-none"
 			/>
-		</div>
-
-		<div class="flex h-full flex-col justify-between gap-3">
-			<ImageUploader
-				:is-question="true"
-				:model-value="question.imageUrl"
-				@update:model-value="store.updateQuestionImageUrl(question, $event)"
-			/>
-			<UButton
-				@click="() => store.deleteQuestion(question)"
-				variant="soft"
-				color="error"
-				>Удалить вопрос</UButton
-			>
 		</div>
 	</div>
 	<USeparator class="w-full" color="primary" />
