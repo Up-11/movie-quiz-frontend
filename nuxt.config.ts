@@ -6,7 +6,6 @@ export default defineNuxtConfig({
 	future: {
 		compatibilityVersion: 4
 	},
-	plugins: ['~/plugins/filters.ts'],
 
 	components: [
 		{ path: '~/shared/components', prefix: '' },

@@ -69,7 +69,7 @@ const {
 				variant="soft"
 				:loading="filmsLoading"
 				v-model:open="isSelectOpen"
-				v-model="selectValue as any"
+				v-model="selectValue"
 				@update:model-value="onChangeSelect"
 				:items="selectItems"
 				@update:open="onSelectChange"
@@ -93,7 +93,7 @@ const {
 						</h1>
 						<UButton
 							variant="soft"
-							@click="deleteFilm(item.label)"
+							@click="() => deleteFilm(item.label)"
 							size="xs"
 							icon="i-lucide-x"
 						></UButton></div
