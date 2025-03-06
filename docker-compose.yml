@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  nuxt-app:
+    build: .
+    container_name: nuxt-container
+    ports:
+      - '3000:3000'
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - HOST=0.0.0.0
+      - PORT=3000
+    restart: unless-stopped
