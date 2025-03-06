@@ -1,3 +1,4 @@
+import { publicApi } from '~/shared/api/interceptors'
 import {
 	removeTokenFromStorage,
 	saveToStorage,
@@ -8,8 +9,7 @@ import { USER_ROLE } from '~/shared/types/common.types'
 
 export const AuthService = {
 	async login(email: string, name: string, password: string) {
-		const { $publicApi } = useNuxtApp()
-		const response = await $publicApi.post<IAuthData>(apiConfig.auth.login, {
+		const response = await publicApi.post<IAuthData>(apiConfig.auth.login, {
 			email,
 			password,
 			name
@@ -25,8 +25,7 @@ export const AuthService = {
 		password: string,
 		role: USER_ROLE
 	) {
-		const { $publicApi } = useNuxtApp()
-		const response = await $publicApi.post<IAuthData>(apiConfig.auth.register, {
+		const response = await publicApi.post<IAuthData>(apiConfig.auth.register, {
 			email,
 			role,
 			name,
@@ -42,8 +41,7 @@ export const AuthService = {
 	},
 
 	async addNewAdmin(email: string, name: string, password: string) {
-		const { $publicApi } = useNuxtApp()
-		return await $publicApi.post(apiConfig.auth.createAdmin, {
+		return await publicApi.post(apiConfig.auth.createAdmin, {
 			email,
 			name,
 			password,

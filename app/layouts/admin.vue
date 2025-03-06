@@ -43,7 +43,7 @@ useHead({
 			<AppBottomMenu class="lg:hidden" />
 		</div>
 
-		<main class="mb-[50px]">
+		<main class="h-screen">
 			<slot />
 		</main>
 	</div>

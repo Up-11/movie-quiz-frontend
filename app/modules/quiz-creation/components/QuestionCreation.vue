@@ -1,15 +1,18 @@
 <script lang="ts" setup>
 import { useQuizCreationStore } from '../store/QuizCreationStore'
+import { useFileUploading } from '../composables/useFileUploading'
 import type { IQuestion } from '../types'
 
-defineProps<{ question: IQuestion }>()
+const props = defineProps<{ question: IQuestion }>()
 
 const store = useQuizCreationStore()
+
+const { handleFileChange } = useFileUploading()
 </script>
 
 <template>
-	<div class="grid grid-cols-3 gap-6 md:grid-cols-3">
-		<div class="col-span-2 flex flex-col gap-4">
+	<div class="grid grid-cols-3 gap-6">
+		<div class="flex flex-col gap-4">
 			<UInput
 				size="xl"
 				variant="soft"
@@ -27,7 +30,7 @@ const store = useQuizCreationStore()
 			/>
 		</div>
 
-		<div class="md:col-span-">
+		<div>
 			<UTextarea
 				placeholder="Введите описание"
 				name="quiz-description"
@@ -39,18 +42,22 @@ const store = useQuizCreationStore()
 				class="w-full !resize-none"
 			/>
 		</div>
+
+		<div class="flex h-full flex-col justify-between gap-3">
+			<ImageUploader
+				:is-question="true"
+				:model-value="question.imageUrl"
+				@update:model-value="store.updateQuestionImageUrl(question, $event)"
+			/>
+			<UButton
+				@click="() => store.deleteQuestion(question)"
+				variant="soft"
+				color="error"
+				>Удалить вопрос</UButton
+			>
+		</div>
 	</div>
 	<USeparator class="w-full" color="primary" />
 </template>
 
-<style scoped>
-@media (max-width: 768px) {
-	.grid {
-		grid-template-columns: 1fr;
-	}
-
-	.md\:col-span-2 {
-		grid-column: span 1;
-	}
-}
-</style>
+<style scoped></style>
