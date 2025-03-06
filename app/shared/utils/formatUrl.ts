@@ -1,3 +1,3 @@
 export default function formatUrl(path: string) {
-	return `http://git-back.ru/${path}`
+	return `http://api.git-back.ru/${path}`
 }
