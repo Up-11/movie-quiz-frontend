@@ -86,7 +86,7 @@ const { fetch: fetchUnauthorized } = useQuery({
 		<VTitle title="Все Викторины" />
 
 		<div
-			class="xs:grid-cols-1 grid justify-center justify-items-center gap-7 sm:grid-cols-2 xl:grid-cols-4 2xl:grid-cols-6"
+			class="xs:grid-cols-1 grid justify-center justify-items-center gap-7 sm:grid-cols-2 xl:grid-cols-4 2xl:grid-cols-5"
 		>
 			<QuizCard
 				v-if="!isLoading"
