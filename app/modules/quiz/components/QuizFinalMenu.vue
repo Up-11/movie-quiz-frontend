@@ -112,13 +112,7 @@ onUnmounted(() => {
 						v-for="(question, index) in quiz.questions"
 						class="mx-auto flex h-full min-h-90 w-full max-w-100 flex-col self-center rounded-xl bg-black/70 backdrop-blur-2xl"
 					>
-						<div class="h-1/2">
-							<NuxtImg
-								:src="formatUrl(question.imageUrl)"
-								class="h-auto w-full rounded-tl-lg rounded-tr-lg object-fill"
-							/>
-						</div>
-						<div class="flex h-1/2 flex-col justify-between gap-4 p-4">
+						<div class="flex flex-col justify-between gap-4 p-4">
 							<h1>Вопрос #{{ index + 1 }}: {{ question.question }}</h1>
 							<USeparator color="neutral" />
 							<h1>Вы ответили: {{ currentAnswer(question) }}</h1>
