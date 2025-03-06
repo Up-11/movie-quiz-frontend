@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { ROUTES } from '~/shared/config/routes'
 import type { IQuizDto } from '../types'
 
 defineProps<{
@@ -7,7 +8,8 @@ defineProps<{
 </script>
 
 <template>
-	<article
+	<NuxtLink
+		:to="ROUTES.quiz(card.id)"
 		class="relative flex w-full cursor-pointer rounded-lg border-2 border-zinc-300 bg-black/50 transition-all hover:border-violet-400"
 	>
 		<UBadge
@@ -32,7 +34,7 @@ defineProps<{
 				{{ card.description }}
 			</p>
 		</div>
-	</article>
+	</NuxtLink>
 </template>
 
 <style scoped></style>
