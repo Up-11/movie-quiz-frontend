@@ -1,3 +1,4 @@
 export default function formatUrl(path: string) {
-	return `http://localhost:4000/${path}`
+	const { $config } = useNuxtApp()
+	return `${$config.public.apiNoPrefix}/${path}`
 }
