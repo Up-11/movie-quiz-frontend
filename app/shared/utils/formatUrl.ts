@@ -1,3 +1,4 @@
 export default function formatUrl(path: string) {
-	return `https://api.git-back.ru/${path}`
+	const { $config } = useNuxtApp()
+	return `${$config.public.baseUrl}/${path}`
 }
